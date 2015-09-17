@@ -1,1 +1,0 @@
-# PG5100_Egentrening_Prosjekt
