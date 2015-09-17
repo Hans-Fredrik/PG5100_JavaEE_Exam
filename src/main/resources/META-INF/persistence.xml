@@ -9,9 +9,10 @@
     <persistence-unit name="Forelesning1">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
+        <class>domain.User</class>
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
-            <property name="javax.persistence.jdbc.url" value="jdbc:h2:tcp://localhost:9092/~Forelesning1" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:h2:tcp://localhost:9092/~/forelesning1" />
             <property name="javax.persistence.jdbc.user" value="hffb" />
             <property name="javax.persistence.jdbc.password" value="Wvcmaq1993" />
             <property name="dialect" value="org.hibernate.dialect.H2Dialect"/>
@@ -23,6 +24,7 @@
 
     <persistence-unit name="Forelesning1Test" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <class>domain.User</class>
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
             <property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:jpa-named-queries;"/>
