@@ -15,11 +15,21 @@ public class UserService {
     private UserDAO userDAO;
 
 
-    // Fixing errro with git .. sadly..
     public List<User> getAllUsers(){
         return userDAO.getAllUsers();
     }
 
+    public boolean createUser(User user){
+        return userDAO.createUser(user);
+    }
 
+    public boolean deleteUserByID(int id){
+        User user = userDAO.getUser(id);
+        return userDAO.deleteUser(user);
+    }
+
+    public boolean updateUser(User user){
+        return userDAO.updateUser(user);
+    }
 
 }

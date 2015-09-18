@@ -1,5 +1,7 @@
 package application;
 
+import domain.User;
+import org.hibernate.annotations.SourceType;
 import org.jboss.weld.environment.se.Weld;
 import org.jboss.weld.environment.se.WeldContainer;
 import repository.UserDAO;
@@ -30,13 +32,13 @@ public class Client {
                         printUsers();
                         break;
                     case "add":
-
+                        addUser(in);
                         break;
                     case "remove":
-
+                        removeUser(in);
                         break;
                     case "update":
-
+                        updateUser(in);
                         break;
                     case "quit":
                         System.exit(0);
@@ -69,14 +71,39 @@ public class Client {
         String password = input.nextLine();
         System.out.println("User Type: ");
         String userType = input.nextLine();
+
+        User user = new User(email, password,userType);
+        System.out.println("Do you want to create y/n: " + user);
+        String in = input.nextLine();
+        if(in.equalsIgnoreCase("y")){
+            System.out.println("User created: " + userService.createUser(user));
+        }else{
+            System.out.println("Did not create user..");
+        }
     }
 
-    public void removeUser(){
+    public void updateUser(Scanner input){
+        System.out.println("Enter ID: ");
+        int id = Integer.parseInt(input.nextLine());
 
+        System.out.println("Enter email, password and user type");
+
+        String email = input.nextLine();
+        String password = input.nextLine();
+        String studentType = input.nextLine();
+
+        User userToUpdate = new User(id, email, password, studentType);
+        if(userService.updateUser(userToUpdate)){
+            System.out.println("User updated..");
+        }else{
+            System.out.println("Something went wrong..");
+        }
     }
 
-    public void updateUser(){
-
+    public void removeUser(Scanner input){
+        System.out.println("ID of remove object: ");
+        int id = input.nextInt();
+        System.out.println("Removed: " + userService.deleteUserByID(id));
     }
 
 
