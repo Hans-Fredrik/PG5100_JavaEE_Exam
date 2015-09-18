@@ -25,7 +25,6 @@ public class UserDAORemoteImpl implements UserDAO{
     @Override
     public boolean createUser(User user) {
         EntityTransaction entityTransaction = entityManager.getTransaction();
-
         entityTransaction.begin();
         entityManager.persist(user);
         entityTransaction.commit();
@@ -39,10 +38,12 @@ public class UserDAORemoteImpl implements UserDAO{
         EntityTransaction entityTransaction = entityManager.getTransaction();
 
         entityTransaction.begin();
+
         User updated = entityManager.find(User.class, user.getId());
         updated.setEmail(user.getEmail());
         updated.setPassword(user.getPassword());
         updated.setUserType(user.getUserType());
+
         entityTransaction.commit();
 
         return false;

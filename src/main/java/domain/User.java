@@ -8,8 +8,7 @@ import javax.persistence.*;
 
 @Entity
 @NamedQueries({
-    @NamedQuery(name = "findAll", query = "SELECT u FROM User u"),
-        @NamedQuery(name = "findByEmail", query = "SELECT u FROM User u WHERE u.email like :mail")
+    @NamedQuery(name = "findAll", query = "SELECT u FROM User u"), @NamedQuery(name = "findByEmail", query = "SELECT u FROM User u WHERE u.email like :mail")
 })
 public class User {
 
@@ -30,6 +29,16 @@ public class User {
         this.password = password;
         this.userType = userType;
     }
+
+
+    public User(int id,String email, String password, String userType) {
+        this.id = id;
+        this.email = email;
+        this.password = password;
+        this.userType = userType;
+    }
+
+
 
     public int getId() {
         return id;
@@ -71,5 +80,22 @@ public class User {
                 ", password='" + password + '\'' +
                 ", user_type='" + userType + '\'' +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof User)) return false;
+
+        User user = (User) o;
+
+        if (id != user.id) return false;
+
+        return true;
+    }
+
+    @Override
+    public int hashCode() {
+        return id;
     }
 }
