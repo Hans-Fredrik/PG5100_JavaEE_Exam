@@ -2,11 +2,13 @@ package repository;
 
 import domain.User;
 
+import javax.enterprise.inject.Alternative;
 import java.util.List;
 
 /**
  * Created by hffb on 17/09/15.
  */
+@Alternative
 public class UserDAOLocalImpl implements UserDAO {
     
     @Override

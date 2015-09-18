@@ -2,15 +2,14 @@ package repository;
 
 import domain.User;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.Query;
+import javax.enterprise.inject.Alternative;
+import javax.persistence.*;
 import java.util.List;
 
 /**
  * Created by hffb on 17/09/15.
  */
+@Alternative
 public class UserDAORemoteImpl implements UserDAO{
 
     private static final String PERSISTENCE_UNIT = "Forelesning1";
@@ -25,18 +24,36 @@ public class UserDAORemoteImpl implements UserDAO{
 
     @Override
     public boolean createUser(User user) {
-        return false;
+        EntityTransaction entityTransaction = entityManager.getTransaction();
+
+        entityTransaction.begin();
+        entityManager.persist(user);
+        entityTransaction.commit();
+
+        return entityManager.contains(user);
     }
+
 
     @Override
     public boolean updateUser(User user) {
+        EntityTransaction entityTransaction = entityManager.getTransaction();
+
+        entityTransaction.begin();
+        User updated = entityManager.find(User.class, user.getId());
+        updated.setEmail(user.getEmail());
+        updated.setPassword(user.getPassword());
+        updated.setUserType(user.getUserType());
+        entityTransaction.commit();
+
         return false;
     }
+
 
     @Override
     public User getUser(int id) {
         return entityManager.find(User.class, id);
     }
+
 
     @Override
     public List<User> getAllUsers() {
@@ -45,8 +62,15 @@ public class UserDAORemoteImpl implements UserDAO{
         return userList;
     }
 
+
     @Override
     public boolean deleteUser(User user) {
-        return false;
+        EntityTransaction entityTransaction = entityManager.getTransaction();
+
+        entityTransaction.begin();
+        entityManager.remove(entityManager.find(User.class, user.getId()));
+        entityTransaction.commit();
+
+        return !entityManager.contains(user);
     }
 }

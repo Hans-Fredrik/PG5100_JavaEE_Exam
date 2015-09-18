@@ -1,9 +1,6 @@
 package domain;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.NamedQueries;
-import javax.persistence.NamedQuery;
+import javax.persistence.*;
 
 /**
  * Created by hffb on 17/09/15.
@@ -17,21 +14,21 @@ import javax.persistence.NamedQuery;
 public class User {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     private String email;
     private String password;
-    private String user_type;
+    private String userType;
 
     public User(){
 
     }
 
 
-    public User(int id, String email, String password, String user_type) {
-        this.id = id;
+    public User(String email, String password, String userType) {
         this.email = email;
         this.password = password;
-        this.user_type = user_type;
+        this.userType = userType;
     }
 
     public int getId() {
@@ -58,12 +55,12 @@ public class User {
         this.password = password;
     }
 
-    public String getUser_type() {
-        return user_type;
+    public String getUserType() {
+        return userType;
     }
 
-    public void setUser_type(String user_type) {
-        this.user_type = user_type;
+    public void setUserType(String userType) {
+        this.userType = userType;
     }
 
     @Override
@@ -72,7 +69,7 @@ public class User {
                 "id=" + id +
                 ", email='" + email + '\'' +
                 ", password='" + password + '\'' +
-                ", user_type='" + user_type + '\'' +
+                ", user_type='" + userType + '\'' +
                 '}';
     }
 }

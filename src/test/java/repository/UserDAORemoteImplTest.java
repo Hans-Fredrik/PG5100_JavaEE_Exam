@@ -1,14 +1,12 @@
 package repository;
 
+import com.sun.org.apache.bcel.internal.generic.NEW;
 import domain.User;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.Query;
+import javax.persistence.*;
 
 import java.util.List;
 
@@ -31,31 +29,55 @@ public class UserDAORemoteImplTest {
 
     @After
     public void tearDown() throws Exception {
-
+        entityManager.close();
+        entityManagerFactory.close();
     }
 
     @Test
     public void testGetUser() throws Exception {
-        User user = entityManager.find(User.class, 2);
-        System.out.println(user.toString());
+        User userFromEntity = entityManager.find(User.class, 1);
+        assertNotNull(userFromEntity);
 
-        Query findByEmail = entityManager.createNamedQuery("findByEmail", User.class).setParameter("mail", "hans@g.no");
-        User user2 = (User) findByEmail.getResultList().get(0);
-        System.out.println("Here: " + user2);
+        User userFromDAO = userDAORemote.getUser(1);
+        assertNotNull(userFromDAO);
 
-        User user3 = userDAORemote.getUser(1);
-        assertNotNull(user3);
+        assertEquals(userFromEntity.getId(), userFromDAO.getId());
+        assertEquals(userFromEntity.getEmail(), userFromDAO.getEmail());
     }
 
 
     @Test
     public void testCreateUser() throws Exception {
+        User userToCreate = new User("12312@g.no", "123", "Student");
 
+        boolean created = userDAORemote.createUser(userToCreate);
+
+        EntityTransaction entityTransaction = entityManager.getTransaction();
+        entityTransaction.begin();
+        entityManager.remove(entityManager.find(User.class, userToCreate.getId()));
+        entityTransaction.commit();
+
+        assertTrue(created);
+        assertFalse(entityManager.contains(userToCreate));
     }
 
     @Test
     public void testUpdateUser() throws Exception {
+        final int ID = 1;
+        final String NEW_PASSWORD = "FRA IT TEST";
 
+        User user = entityManager.find(User.class, ID);
+        final String OLD_PASSWORD = user.getPassword();
+
+        user.setPassword(NEW_PASSWORD);
+        userDAORemote.updateUser(user);
+
+        assertNotEquals(OLD_PASSWORD, entityManager.find(User.class, ID).getPassword());
+
+        user.setPassword(OLD_PASSWORD);
+        userDAORemote.updateUser(user);
+
+        assertEquals(OLD_PASSWORD, entityManager.find(User.class, ID).getPassword());
     }
 
     @Test
@@ -66,6 +88,13 @@ public class UserDAORemoteImplTest {
 
     @Test
     public void testDeleteUser() throws Exception {
+        EntityTransaction entityTransaction = entityManager.getTransaction();
 
+        User userToDelete = new User("test@NITH.no", "ingen", "Student");
+        entityTransaction.begin();
+        entityManager.persist(userToDelete);
+        entityTransaction.commit();
+
+        assertTrue(userDAORemote.deleteUser(userToDelete));
     }
 }
