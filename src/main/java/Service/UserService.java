@@ -15,6 +15,7 @@ public class UserService {
     private UserDAO userDAO;
 
 
+    // Fixing errro with git .. sadly..
     public List<User> getAllUsers(){
         return userDAO.getAllUsers();
     }
