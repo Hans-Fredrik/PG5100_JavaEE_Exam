@@ -23,6 +23,8 @@ public class UserDAOLocalImplTest {
         assertTrue(userDAOLocal.updateUser(user));
 
         assertEquals(userDAOLocal.getUser(1).getUserType(), user.getUserType());
+
+        assertFalse(userDAOLocal.updateUser(new User(1000, "ingen", "ingen", "ingen")));
     }
 
     @Test
@@ -32,11 +34,14 @@ public class UserDAOLocalImplTest {
 
     @Test
     public void testGetAllUsers() throws Exception {
+        assertNotNull(userDAOLocal.getAllUsers());
 
     }
 
     @Test
     public void testDeleteUser() throws Exception {
-
+        User toDelete = new User(99, "test@email.no", "Ingen", "Tester");
+        userDAOLocal.createUser(toDelete);
+        assertTrue(userDAOLocal.deleteUser(toDelete));
     }
 }

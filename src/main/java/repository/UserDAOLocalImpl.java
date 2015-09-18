@@ -48,6 +48,6 @@ public class UserDAOLocalImpl implements UserDAO {
 
     @Override
     public boolean deleteUser(User user) {
-        return false;
+        return users.remove(user);
     }
 }
