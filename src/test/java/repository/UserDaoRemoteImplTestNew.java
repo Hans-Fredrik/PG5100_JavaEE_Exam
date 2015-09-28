@@ -14,7 +14,7 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 @Category(IntegrationTest.class)
-public class UserDAORemoteImplTest {
+public class UserDaoRemoteImplTestNew {
 
     private static final String PERSISTENCE_UNIT = "Forelesning1";
 
