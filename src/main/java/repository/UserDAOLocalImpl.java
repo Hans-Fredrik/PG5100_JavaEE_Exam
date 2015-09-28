@@ -10,11 +10,11 @@ import java.util.List;
  * Created by hffb on 17/09/15.
  */
 @Alternative
-public class UserDAONewLocalImpl implements UserDaoNew {
+public class UserDAOLocalImpl implements UserDAO {
 
     private ArrayList<User> users;
 
-    public UserDAONewLocalImpl() {
+    public UserDAOLocalImpl() {
         users = new ArrayList<>();
         users.add(new User(1,"hans@NITH.no", "hansformers", "Teacher"));
         users.add(new User(2,"per@NITH.no", "heiper", "Student"));

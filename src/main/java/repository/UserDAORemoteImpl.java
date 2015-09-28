@@ -10,14 +10,14 @@ import java.util.List;
  * Created by hffb on 17/09/15.
  */
 @Alternative
-public class UserDAONewRemoteImpl implements UserDaoNew {
+public class UserDAORemoteImpl implements UserDAO {
 
     private static final String PERSISTENCE_UNIT = "Forelesning1";
     private EntityManagerFactory entityManagerFactory;
     private EntityManager entityManager;
 
 
-    public UserDAONewRemoteImpl(){
+    public UserDAORemoteImpl(){
         entityManagerFactory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT);
         entityManager = entityManagerFactory.createEntityManager();
     }

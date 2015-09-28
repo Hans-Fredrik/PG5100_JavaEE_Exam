@@ -5,9 +5,9 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-public class UserDaoLocalImplTestNew {
+public class UserDAOLocalImplTest {
 
-    private UserDaoNew userDAOLocal= new UserDAONewLocalImpl();
+    private UserDAO userDAOLocal= new UserDAOLocalImpl();
 
 
     @Test

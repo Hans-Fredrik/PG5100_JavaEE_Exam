@@ -13,19 +13,19 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 @Category(IntegrationTest.class)
-public class UserDaoRemoteImplTestNew {
+public class UserDAORemoteImplTest {
 
     private static final String PERSISTENCE_UNIT = "Forelesning1";
 
     private EntityManagerFactory entityManagerFactory;
     private EntityManager entityManager;
-    private UserDAONewRemoteImpl userDAORemote;
+    private UserDAORemoteImpl userDAORemote;
 
     @Before
     public void setUp() throws Exception {
         entityManagerFactory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT);
         entityManager = entityManagerFactory.createEntityManager();
-        userDAORemote = new UserDAONewRemoteImpl();
+        userDAORemote = new UserDAORemoteImpl();
     }
 
     @After

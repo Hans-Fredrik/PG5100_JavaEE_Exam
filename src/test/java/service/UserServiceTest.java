@@ -5,7 +5,7 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.mockito.Mockito;
-import repository.UserDaoNew;
+import repository.UserDAO;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
@@ -17,7 +17,7 @@ public class UserServiceTest {
     @Before
     public void setUp() throws Exception {
         userService = new UserService();
-        userService.userDAO  = Mockito.mock(UserDaoNew.class);
+        userService.userDAO  = Mockito.mock(UserDAO.class);
 
     }
 
