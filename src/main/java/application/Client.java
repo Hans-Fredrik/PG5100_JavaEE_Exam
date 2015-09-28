@@ -112,7 +112,6 @@ public class Client {
     }
 
 
-
     public static void main(String[] args) {
         WeldContainer container = new Weld().initialize();
         Instance<UserService> service = container.instance().select(UserService.class);

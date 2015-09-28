@@ -5,6 +5,7 @@ import domain.User;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
 import javax.persistence.*;
 
@@ -12,6 +13,7 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
+@Category(IntegrationTest.class)
 public class UserDAORemoteImplTest {
 
     private static final String PERSISTENCE_UNIT = "Forelesning1";
