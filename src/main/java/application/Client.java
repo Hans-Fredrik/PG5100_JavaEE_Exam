@@ -1,10 +1,8 @@
 package application;
 
 import domain.User;
-import org.hibernate.annotations.SourceType;
 import org.jboss.weld.environment.se.Weld;
 import org.jboss.weld.environment.se.WeldContainer;
-import repository.UserDAO;
 import service.UserService;
 import javax.enterprise.inject.Instance;
 import java.util.Scanner;

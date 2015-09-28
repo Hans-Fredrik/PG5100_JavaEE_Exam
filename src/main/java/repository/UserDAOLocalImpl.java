@@ -10,7 +10,7 @@ import java.util.List;
  * Created by hffb on 17/09/15.
  */
 @Alternative
-public class UserDAOLocalImpl implements UserDAO {
+public class UserDAOLocalImpl implements UserDao {
 
     private ArrayList<User> users;
 

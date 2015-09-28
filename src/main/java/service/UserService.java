@@ -1,7 +1,7 @@
 package service;
 
 import domain.User;
-import repository.UserDAO;
+import repository.UserDao;
 
 import javax.inject.Inject;
 import java.util.List;
@@ -12,7 +12,7 @@ import java.util.List;
 public class UserService {
 
     @Inject
-    public UserDAO userDAO;
+    public UserDao userDAO;
 
 
     public List<User> getAllUsers(){

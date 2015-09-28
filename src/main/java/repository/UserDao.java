@@ -7,8 +7,9 @@ import java.util.List;
 /**
  * Created by hffb on 17/09/15.
  */
-public interface UserDAO {
+public interface UserDao {
 
+//  Changes this to return a usre object instead-!
     boolean createUser(User user);
 
     boolean updateUser(User user);
@@ -18,5 +19,7 @@ public interface UserDAO {
     List<User> getAllUsers();
 
     boolean deleteUser(User user);
+
+
 
 }

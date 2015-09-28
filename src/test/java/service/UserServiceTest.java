@@ -4,10 +4,8 @@ import domain.User;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import org.mockito.Mock;
 import org.mockito.Mockito;
-import repository.UserDAO;
-import repository.UserDAORemoteImpl;
+import repository.UserDao;
 
 import static org.junit.Assert.*;
 import static org.mockito.Mockito.*;
@@ -19,7 +17,7 @@ public class UserServiceTest {
     @Before
     public void setUp() throws Exception {
         userService = new UserService();
-        userService.userDAO  = Mockito.mock(UserDAO.class);
+        userService.userDAO  = Mockito.mock(UserDao.class);
 
     }
 

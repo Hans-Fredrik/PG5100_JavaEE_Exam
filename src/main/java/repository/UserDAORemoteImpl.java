@@ -10,7 +10,7 @@ import java.util.List;
  * Created by hffb on 17/09/15.
  */
 @Alternative
-public class UserDAORemoteImpl implements UserDAO{
+public class UserDAORemoteImpl implements UserDao {
 
     private static final String PERSISTENCE_UNIT = "Forelesning1";
     private EntityManagerFactory entityManagerFactory;
