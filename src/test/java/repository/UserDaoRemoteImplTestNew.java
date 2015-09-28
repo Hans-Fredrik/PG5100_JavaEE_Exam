@@ -1,6 +1,5 @@
 package repository;
 
-import com.sun.org.apache.bcel.internal.generic.NEW;
 import domain.User;
 import org.junit.After;
 import org.junit.Before;
@@ -20,13 +19,13 @@ public class UserDaoRemoteImplTestNew {
 
     private EntityManagerFactory entityManagerFactory;
     private EntityManager entityManager;
-    private UserDAORemoteImpl userDAORemote;
+    private UserDAONewRemoteImpl userDAORemote;
 
     @Before
     public void setUp() throws Exception {
         entityManagerFactory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT);
         entityManager = entityManagerFactory.createEntityManager();
-        userDAORemote = new UserDAORemoteImpl();
+        userDAORemote = new UserDAONewRemoteImpl();
     }
 
     @After

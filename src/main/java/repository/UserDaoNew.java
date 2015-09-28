@@ -7,7 +7,7 @@ import java.util.List;
 /**
  * Created by hffb on 17/09/15.
  */
-public interface UserDao {
+public interface UserDaoNew {
 
 //  Changes this to return a usre object instead-!
     boolean createUser(User user);
