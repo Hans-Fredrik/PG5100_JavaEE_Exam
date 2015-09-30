@@ -3,6 +3,7 @@ package application;
 import domain.User;
 import org.jboss.weld.environment.se.Weld;
 import org.jboss.weld.environment.se.WeldContainer;
+import repository.UserDAORemoteImpl;
 import service.UserService;
 import javax.enterprise.inject.Instance;
 import java.util.Scanner;
@@ -39,7 +40,6 @@ public class Client {
                         updateUser(in);
                         break;
                     case "quit":
-                        System.exit(0);
                         break;
                     default:
                         System.out.println("Commando not recognized");
@@ -47,6 +47,12 @@ public class Client {
 
             }while(!input.equals("quit"));
         }
+
+        if(userService.userDAO instanceof UserDAORemoteImpl){
+            ((UserDAORemoteImpl) userService.userDAO).entityManager.close();
+            ((UserDAORemoteImpl) userService.userDAO).entityManagerFactory.close();
+        }
+
     }
 
     public String welcomeMessage(){
@@ -116,6 +122,10 @@ public class Client {
 
         service.get().getAllUsers().forEach(user -> System.out.println(user));
 
-        new Client(service.get());
+        UserService userService1 = service.get();
+
+        new Client(userService1);
+
+        System.exit(0);
     }
 }

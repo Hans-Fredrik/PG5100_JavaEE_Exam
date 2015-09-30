@@ -9,7 +9,6 @@ import java.util.List;
 /**
  * Created by hffb on 17/09/15.
  */
-@Alternative
 public class UserDAOLocalImpl implements UserDAO {
 
     private ArrayList<User> users;
@@ -50,4 +49,5 @@ public class UserDAOLocalImpl implements UserDAO {
     public boolean deleteUser(User user) {
         return users.remove(user);
     }
+
 }

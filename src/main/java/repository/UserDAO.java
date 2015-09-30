@@ -21,5 +21,4 @@ public interface UserDAO {
     boolean deleteUser(User user);
 
 
-
 }

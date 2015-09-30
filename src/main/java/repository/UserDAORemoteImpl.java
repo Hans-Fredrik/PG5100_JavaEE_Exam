@@ -3,18 +3,22 @@ package repository;
 import domain.User;
 
 import javax.enterprise.inject.Alternative;
+import javax.interceptor.AroundInvoke;
+import javax.interceptor.InvocationContext;
 import javax.persistence.*;
 import java.util.List;
 
 /**
  * Created by hffb on 17/09/15.
  */
-@Alternative
+@RemoteQualifier
 public class UserDAORemoteImpl implements UserDAO {
 
+    // TODO: Denne bør ikke settes her, da det går utover for eksempel testen som skal gå mot test.
+    // Den riktige løsningen vil være å ta imot i konstruktør..
     private static final String PERSISTENCE_UNIT = "Forelesning1";
-    private EntityManagerFactory entityManagerFactory;
-    private EntityManager entityManager;
+    public EntityManagerFactory entityManagerFactory;
+    public EntityManager entityManager;
 
 
     public UserDAORemoteImpl(){
@@ -24,29 +28,18 @@ public class UserDAORemoteImpl implements UserDAO {
 
     @Override
     public boolean createUser(User user) {
-        EntityTransaction entityTransaction = entityManager.getTransaction();
-        entityTransaction.begin();
         entityManager.persist(user);
-        entityTransaction.commit();
-
         return entityManager.contains(user);
     }
 
 
     @Override
     public boolean updateUser(User user) {
-        EntityTransaction entityTransaction = entityManager.getTransaction();
-
-        entityTransaction.begin();
-
         User updated = entityManager.find(User.class, user.getId());
         updated.setEmail(user.getEmail());
         updated.setPassword(user.getPassword());
         updated.setUserType(user.getUserType());
-
-        entityTransaction.commit();
-
-        return false;
+        return true;
     }
 
 
@@ -66,12 +59,21 @@ public class UserDAORemoteImpl implements UserDAO {
 
     @Override
     public boolean deleteUser(User user) {
-        EntityTransaction entityTransaction = entityManager.getTransaction();
-
-        entityTransaction.begin();
         entityManager.remove(entityManager.find(User.class, user.getId()));
-        entityTransaction.commit();
-
-        return !entityManager.contains(user);
+        return entityManager.contains(user);
     }
+
+    @AroundInvoke
+    private Object intercept(InvocationContext ic) throws Exception {
+        System.out.println(UserDAORemoteImpl.class.getSimpleName() + " - " + ic.getMethod().getName() + " transaction begin");
+        EntityTransaction entityTransaction = entityManager.getTransaction();
+        entityTransaction.begin();
+        try {
+            return ic.proceed();
+        } finally {
+            System.out.println(UserDAORemoteImpl.class.getSimpleName() + " - " + ic.getMethod().getName() + "transaction commit");
+            entityTransaction.commit();
+        }
+    }
+
 }
