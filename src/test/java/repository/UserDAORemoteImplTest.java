@@ -18,10 +18,8 @@ public class UserDAORemoteImplTest {
     // TODO: Skriv om denne testen er du snill...
 
     private static final String PERSISTENCE_UNIT = "Forelesning1";
-
     private EntityManagerFactory entityManagerFactory;
     private EntityManager entityManager;
-
     private UserDAORemoteImpl userDAORemote;
 
     @Before
