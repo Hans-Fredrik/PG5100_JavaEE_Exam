@@ -9,16 +9,14 @@ import java.util.List;
  */
 public interface UserDAO {
 
-//  Changes this to return a usre object instead-!
-    boolean createUser(User user);
+    User createUser(User user);
 
-    boolean updateUser(User user);
+    User updateUser(User user);
 
     User getUser(int id);
 
     List<User> getAllUsers();
 
     boolean deleteUser(User user);
-
 
 }

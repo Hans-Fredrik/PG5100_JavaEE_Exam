@@ -49,8 +49,7 @@ public class Client {
         }
 
         if(userService.userDAO instanceof UserDAORemoteImpl){
-            ((UserDAORemoteImpl) userService.userDAO).entityManager.close();
-            ((UserDAORemoteImpl) userService.userDAO).entityManagerFactory.close();
+            ((UserDAORemoteImpl) userService.userDAO).close();
         }
 
     }
@@ -97,11 +96,9 @@ public class Client {
         String studentType = input.nextLine();
 
         User userToUpdate = new User(id, email, password, studentType);
-        if(userService.updateUser(userToUpdate)){
-            System.out.println("User updated..");
-        }else{
-            System.out.println("Something went wrong..");
-        }
+
+        userService.updateUser(userToUpdate);
+        System.out.println("User updated..");
     }
 
     public void removeUser(Scanner input){
@@ -119,8 +116,6 @@ public class Client {
     public static void main(String[] args) {
         WeldContainer container = new Weld().initialize();
         Instance<UserService> service = container.instance().select(UserService.class);
-
-        service.get().getAllUsers().forEach(user -> System.out.println(user));
 
         UserService userService1 = service.get();
 

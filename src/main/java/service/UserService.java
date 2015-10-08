@@ -20,7 +20,7 @@ public class UserService {
         return userDAO.getAllUsers();
     }
 
-    public boolean createUser(User user){
+    public User createUser(User user){
         return userDAO.createUser(user);
     }
 
@@ -36,7 +36,7 @@ public class UserService {
         return userDAO.deleteUser(user);
     }
 
-    public boolean updateUser(User user){
+    public User updateUser(User user){
         return userDAO.updateUser(user);
     }
 

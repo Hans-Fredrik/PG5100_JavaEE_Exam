@@ -2,7 +2,6 @@ package repository;
 
 import domain.User;
 
-import javax.enterprise.inject.Alternative;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -22,17 +21,21 @@ public class UserDAOLocalImpl implements UserDAO {
     }
 
     @Override
-    public boolean createUser(User user) {
-        return users.add(user);
+    public User createUser(User user) {
+        if(users.add(user)){
+            return user;
+        }
+        return null;
     }
 
     @Override
-    public boolean updateUser(User user) {
+    public User updateUser(User user) {
         if(users.contains(user)){
             users.remove(user);
-            return users.add(user);
+             users.add(user);
+            return user;
         }
-        return false;
+        return null;
     }
 
     @Override

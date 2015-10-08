@@ -12,7 +12,8 @@ import javax.validation.constraints.Pattern;
 
 @Entity
 @NamedQueries({
-    @NamedQuery(name = "findAll", query = "SELECT u FROM User u"), @NamedQuery(name = "findByEmail", query = "SELECT u FROM User u WHERE u.email like :mail")
+    @NamedQuery(name = "findAll", query = "SELECT u FROM User u"),
+        @NamedQuery(name = "findByEmail", query = "SELECT u FROM User u WHERE u.email like :mail"),
 })
 public class User {
 

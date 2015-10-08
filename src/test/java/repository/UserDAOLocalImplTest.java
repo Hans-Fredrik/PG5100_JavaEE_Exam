@@ -13,18 +13,18 @@ public class UserDAOLocalImplTest {
     @Test
     public void testCreateUser() throws Exception {
         User userToCreate = new User("test@nith.no", "testing", "Student");
-        assertTrue(userDAOLocal.createUser(userToCreate));
+        assertNotNull(userDAOLocal.createUser(userToCreate));
     }
 
     @Test
     public void testUpdateUser() throws Exception {
         User user = new User(1,"hans@NITH.no", "hansformers", "Teacher");
         user.setUserType("TESTER");
-        assertTrue(userDAOLocal.updateUser(user));
+        assertNotNull(userDAOLocal.updateUser(user));
 
         assertEquals(userDAOLocal.getUser(1).getUserType(), user.getUserType());
 
-        assertFalse(userDAOLocal.updateUser(new User(1000, "ingen", "ingen", "ingen")));
+        assertNotNull(userDAOLocal.updateUser(new User(1000, "ingen", "ingen", "ingen")));
     }
 
     @Test

@@ -31,8 +31,6 @@ public class UserTest {
         assertEquals(2, violations.size());
     }
 
-
-
     @Test
     public void testInvalidValue()throws Exception{
         User user = new User("test", "test", "Student");
@@ -40,7 +38,6 @@ public class UserTest {
         violations.forEach(v -> System.out.println(v));
         assertEquals(2, violations.size());
     }
-
 
     @Test
     public void testValidInput() throws Exception {

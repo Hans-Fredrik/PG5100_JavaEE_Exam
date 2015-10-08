@@ -15,66 +15,53 @@ import static org.junit.Assert.*;
 @Category(IntegrationTest.class)
 public class UserDAORemoteImplTest {
 
-    // TODO: Skriv om denne testen er du snill...
-
-    private static final String PERSISTENCE_UNIT = "Forelesning1";
-    private EntityManagerFactory entityManagerFactory;
-    private EntityManager entityManager;
     private UserDAORemoteImpl userDAORemote;
 
     @Before
     public void setUp() throws Exception {
-        entityManagerFactory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT);
-        entityManager = entityManagerFactory.createEntityManager();
-        userDAORemote = new UserDAORemoteImpl();
+        userDAORemote = new UserDAORemoteImpl("Forelesning1Test");
     }
 
     @After
     public void tearDown() throws Exception {
-        entityManager.close();
-        entityManagerFactory.close();
+        userDAORemote.close();
     }
 
     @Test
     public void testGetUser() throws Exception {
-        User userFromEntity = entityManager.find(User.class, 1);
-        assertNotNull(userFromEntity);
-
         User userFromDAO = userDAORemote.getUser(1);
         assertNotNull(userFromDAO);
-
-        assertEquals(userFromEntity.getId(), userFromDAO.getId());
-        assertEquals(userFromEntity.getEmail(), userFromDAO.getEmail());
+        assertNotNull(userFromDAO.getId());
+        assertNotNull(userFromDAO.getEmail());
+        assertNotNull(userFromDAO.getPassword());
+        assertNotNull(userFromDAO.getUserType());
     }
 
 
     @Test
     public void testCreateUser() throws Exception {
         User userToCreate = new User("12312@g.no", "123HF23jf", "Student");
-
-        boolean created = userDAORemote.createUser(userToCreate);
-        assertTrue(created);
+        User created = userDAORemote.createUser(userToCreate);
+        assertNotNull(created);
     }
 
     @Test
     public void testUpdateUser() throws Exception {
-        final int ID = 1;
-        final String NEW_PASSWORD = "FRA IT TEST";
+        final int ID = 2;
+        final String NEW_PASSWORD = "Tester123T";
 
-        User user = entityManager.find(User.class, ID);
+        User user = userDAORemote.getUser(ID);
         final String OLD_PASSWORD = user.getPassword();
 
         user.setPassword(NEW_PASSWORD);
         userDAORemote.updateUser(user);
 
-        assertNotEquals(OLD_PASSWORD, entityManager.find(User.class, ID).getPassword());
+        assertNotEquals(OLD_PASSWORD, userDAORemote.getUser(ID).getPassword());
 
         user.setPassword(OLD_PASSWORD);
         userDAORemote.updateUser(user);
 
-        assertEquals(OLD_PASSWORD, entityManager.find(User.class, ID).getPassword());
-
-
+        assertEquals(OLD_PASSWORD, userDAORemote.getUser(ID).getPassword());
     }
 
     @Test
@@ -86,9 +73,13 @@ public class UserDAORemoteImplTest {
 
     @Test
     public void testDeleteUser() throws Exception {
-        User userToDelete = new User("test@NITH.no", "Hei123HF2", "Student");
+        final int ID = 1;
+        final String EMAIL = "test@t.no";
+        final String PASSWORD = "Tester123";
+        final String TYPE = "Tester";
 
-        userDAORemote.createUser(userToDelete);
+        User userToDelete = new User(ID, EMAIL, PASSWORD, TYPE);
+
 
         // TODO: Denne testen må fikses, og create må returnerer objectet som er laget!!
     }
