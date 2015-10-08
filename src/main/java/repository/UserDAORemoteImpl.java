@@ -80,7 +80,7 @@ public class UserDAORemoteImpl implements UserDAO {
         }
     }
 
-    
+
 
     public void close(){
         entityManager.close();

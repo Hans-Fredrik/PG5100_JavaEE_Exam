@@ -23,8 +23,6 @@ public class UserDAOLocalImplTest {
         assertNotNull(userDAOLocal.updateUser(user));
 
         assertEquals(userDAOLocal.getUser(1).getUserType(), user.getUserType());
-
-        assertNotNull(userDAOLocal.updateUser(new User(1000, "ingen", "ingen", "ingen")));
     }
 
     @Test
