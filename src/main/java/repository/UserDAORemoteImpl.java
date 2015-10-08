@@ -13,21 +13,15 @@ import java.util.List;
 @RemoteQualifier
 public class UserDAORemoteImpl implements UserDAO {
 
-    private static String PERSISTENCE_UNIT = "Forelesning1";
     public EntityManagerFactory entityManagerFactory;
     public EntityManager entityManager;
 
 
     public UserDAORemoteImpl(){
-        entityManagerFactory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT);
+        entityManagerFactory = Persistence.createEntityManagerFactory("UserDatabase");
         entityManager = entityManagerFactory.createEntityManager();
     }
 
-    public UserDAORemoteImpl(String persistenceUnit){
-        this.PERSISTENCE_UNIT = persistenceUnit;
-        entityManagerFactory = Persistence.createEntityManagerFactory(PERSISTENCE_UNIT);
-        entityManager = entityManagerFactory.createEntityManager();
-    }
 
     @Override
     public User createUser(User user) {

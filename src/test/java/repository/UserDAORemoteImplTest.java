@@ -19,7 +19,7 @@ public class UserDAORemoteImplTest {
 
     @Before
     public void setUp() throws Exception {
-        userDAORemote = new UserDAORemoteImpl("Forelesning1Test");
+        userDAORemote = new UserDAORemoteImpl();
     }
 
     @After
