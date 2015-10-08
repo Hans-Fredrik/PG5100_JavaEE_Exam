@@ -49,7 +49,7 @@ public class Client {
         }
 
         if(userService.userDAO instanceof UserDAORemoteImpl){
-            ((UserDAORemoteImpl) userService.userDAO).close();
+            ((UserDAORemoteImpl) userService.userDAO).entityManager.close();
         }
 
     }

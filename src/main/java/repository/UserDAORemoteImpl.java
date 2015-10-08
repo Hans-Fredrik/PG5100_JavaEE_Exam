@@ -13,13 +13,10 @@ import java.util.List;
 @RemoteQualifier
 public class UserDAORemoteImpl implements UserDAO {
 
-    public EntityManagerFactory entityManagerFactory;
+    @PersistenceContext(name = "UserDatabase")
     public EntityManager entityManager;
 
-
     public UserDAORemoteImpl(){
-        entityManagerFactory = Persistence.createEntityManagerFactory("UserDatabase");
-        entityManager = entityManagerFactory.createEntityManager();
     }
 
 
@@ -74,10 +71,4 @@ public class UserDAORemoteImpl implements UserDAO {
         }
     }
 
-
-
-    public void close(){
-        entityManager.close();
-        entityManagerFactory.close();
-    }
 }
