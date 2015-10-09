@@ -2,21 +2,30 @@ package repository;
 
 import domain.User;
 
+import javax.ejb.Stateful;
+import javax.ejb.Stateless;
+import javax.enterprise.inject.Produces;
+import javax.inject.Inject;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.InvocationContext;
 import javax.persistence.*;
+import javax.transaction.UserTransaction;
 import java.util.List;
 
 /**
  * Created by hffb on 17/09/15.
  */
 @RemoteQualifier
+@Stateless
 public class UserDAORemoteImpl implements UserDAO {
 
-    @PersistenceContext(name = "UserDatabase")
-    public EntityManager entityManager;
+    @PersistenceContext(unitName = "UserDatabase")
+    private EntityManager entityManager;
+    public EntityManagerFactory entityManagerFactory;
 
     public UserDAORemoteImpl(){
+        entityManagerFactory = Persistence.createEntityManagerFactory("UserDatabase");
+        entityManager = entityManagerFactory.createEntityManager();
     }
 
 
@@ -54,15 +63,18 @@ public class UserDAORemoteImpl implements UserDAO {
     @Override
     public boolean deleteUser(User user) {
         entityManager.remove(entityManager.find(User.class, user.getId()));
-        return entityManager.contains(user);
+        return !entityManager.contains(user);
     }
 
 
     @AroundInvoke
     private Object intercept(InvocationContext ic) throws Exception {
+        if(ic.getMethod().getName().equals("close")) return ic.proceed();
+
         System.out.println(UserDAORemoteImpl.class.getSimpleName() + " - " + ic.getMethod().getName() + " transaction begin");
         EntityTransaction entityTransaction = entityManager.getTransaction();
         entityTransaction.begin();
+
         try {
             return ic.proceed();
         } finally {
@@ -70,5 +82,12 @@ public class UserDAORemoteImpl implements UserDAO {
             entityTransaction.commit();
         }
     }
+
+
+    public void close(){
+        entityManager.close();
+        entityManagerFactory.close();
+    }
+
 
 }

@@ -10,6 +10,7 @@ import org.junit.experimental.categories.Category;
 import service.UserService;
 
 import javax.enterprise.inject.Instance;
+import javax.inject.Inject;
 import javax.persistence.*;
 
 import java.util.List;
@@ -30,8 +31,7 @@ public class UserDAORemoteImplTest {
 
     @After
     public void tearDown() throws Exception {
-        userDAORemote.entityManager.close();
-        userDAORemote.entityManagerFactory.close();
+        userDAORemote.close();
     }
 
     @Test
@@ -42,28 +42,25 @@ public class UserDAORemoteImplTest {
         assertNotNull(userFromDAO.getEmail());
         assertNotNull(userFromDAO.getPassword());
         assertNotNull(userFromDAO.getUserType());
+        assertTrue(userFromDAO.getId() > 0);
     }
 
 
     @Test
     public void testCreateUser() throws Exception {
-        User userToCreate = new User("12312@g.no", "123HF23jf", "Student");
-        User created = userDAORemote.createUser(userToCreate);
+        User created = userDAORemote.createUser(new User("Test@Test.no", "Test12345", "Student"));
         assertNotNull(created);
-        System.out.println(userToCreate);
+        assertTrue(created.getId() > 0);
     }
 
     @Test
     public void testUpdateUser() throws Exception {
-        final int ID = 2;
-        final String NEW_PASSWORD = "Tester123T";
-
+        final int ID = 1;
         User user = userDAORemote.getUser(ID);
-        final String OLD_PASSWORD = user.getPassword();
+        String OLD_PASSWORD = user.getPassword();
 
-        user.setPassword(NEW_PASSWORD);
+        user.setPassword("TestNy123");
         userDAORemote.updateUser(user);
-
         assertNotEquals(OLD_PASSWORD, userDAORemote.getUser(ID).getPassword());
     }
 
@@ -72,17 +69,14 @@ public class UserDAORemoteImplTest {
         List<User> userList = userDAORemote.getAllUsers();
         userList.forEach(user -> System.out.println(user));
         assertNotNull(userList);
+        assertTrue(userList.size() > 0);
     }
 
     @Test
     public void testDeleteUser() throws Exception {
         final int ID = 1;
-        final String EMAIL = "test@t.no";
-        final String PASSWORD = "Tester123";
-        final String TYPE = "Tester";
-
-        User userToDelete = new User(ID, EMAIL, PASSWORD, TYPE);
-
-        // TODO: Denne testen må fikses, og create må returnerer objectet som er laget!!
+        User userToDelete = userDAORemote.getUser(ID);
+        assertTrue(userDAORemote.deleteUser(userToDelete));
+        assertNull(userDAORemote.getUser(ID));
     }
 }

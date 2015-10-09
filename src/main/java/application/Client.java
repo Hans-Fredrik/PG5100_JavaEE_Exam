@@ -6,6 +6,7 @@ import org.jboss.weld.environment.se.WeldContainer;
 import repository.UserDAORemoteImpl;
 import service.UserService;
 import javax.enterprise.inject.Instance;
+import javax.inject.Inject;
 import java.util.Scanner;
 
 /**
@@ -49,7 +50,7 @@ public class Client {
         }
 
         if(userService.userDAO instanceof UserDAORemoteImpl){
-            ((UserDAORemoteImpl) userService.userDAO).entityManager.close();
+            ((UserDAORemoteImpl) userService.userDAO).close();
         }
 
     }
