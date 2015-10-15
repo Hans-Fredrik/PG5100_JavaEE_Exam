@@ -30,8 +30,6 @@ public class Course {
     private List<User> users;
 
 
-
-
     public Course(){
 
     }
@@ -63,5 +61,15 @@ public class Course {
 
     public void setUsers(List<User> users) {
         this.users = users;
+    }
+
+    @Override
+    public String toString() {
+        return "Course{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", location=" + location +
+                ", users=" + users +
+                '}';
     }
 }
