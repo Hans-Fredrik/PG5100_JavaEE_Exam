@@ -3,10 +3,9 @@ package application;
 import domain.User;
 import org.jboss.weld.environment.se.Weld;
 import org.jboss.weld.environment.se.WeldContainer;
-import repository.UserDAORemoteImpl;
+import repository.UserDAO;
 import service.UserService;
 import javax.enterprise.inject.Instance;
-import javax.inject.Inject;
 import java.util.Scanner;
 
 /**
@@ -49,8 +48,8 @@ public class Client {
             }while(!input.equals("quit"));
         }
 
-        if(userService.userDAO instanceof UserDAORemoteImpl){
-            ((UserDAORemoteImpl) userService.userDAO).close();
+        if(userService.userDAO instanceof UserDAO){
+            ((UserDAO) userService.userDAO).close();
         }
 
     }

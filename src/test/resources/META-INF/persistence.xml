@@ -6,9 +6,11 @@
              version="2.1">
 
 
-    <persistence-unit name="UserDatabase" transaction-type="RESOURCE_LOCAL">
+    <persistence-unit name="egentrening" transaction-type="RESOURCE_LOCAL">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <class>domain.User</class>
+        <class>domain.Location</class>
+        <class>domain.Course</class>
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
             <property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:jpa-named-queries;"/>

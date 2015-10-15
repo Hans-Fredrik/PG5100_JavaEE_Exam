@@ -2,9 +2,9 @@ package domain;
 
 
 import javax.persistence.*;
-import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Pattern;
+import java.util.List;
 
 /**
  * Created by hffb on 17/09/15.
@@ -27,6 +27,9 @@ public class User {
     @Pattern(regexp = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{4,16}$")
     private String password;
     private String userType;
+
+    @ManyToMany(mappedBy = "users")
+    private List<Course> courses;
 
     public User(){
 
@@ -77,6 +80,13 @@ public class User {
         this.userType = userType;
     }
 
+    public List<Course> getCourses() {
+        return courses;
+    }
+
+    public void setCourses(List<Course> courses) {
+        this.courses = courses;
+    }
     @Override
     public String toString() {
         return "User{" +

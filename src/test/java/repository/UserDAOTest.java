@@ -15,25 +15,25 @@ import java.util.List;
 import static org.junit.Assert.*;
 
 @Category(IntegrationTest.class)
-public class UserDAORemoteImplTest {
+public class UserDAOTest {
 
-    private UserDAORemoteImpl userDAORemote;
+    private UserDAO userDAO;
 
     @Before
     public void setUp() throws Exception {
         WeldContainer container = new Weld().initialize();
-        Instance<UserDAORemoteImpl> service = container.instance().select(UserDAORemoteImpl.class);
-        userDAORemote = service.get();
+        Instance<UserDAO> service = container.instance().select(UserDAO.class);
+        userDAO = service.get();
     }
 
     @After
     public void tearDown() throws Exception {
-        userDAORemote.close();
+        userDAO.close();
     }
 
     @Test
     public void testGetUser() throws Exception {
-        User userFromDAO = userDAORemote.findById(1);
+        User userFromDAO = userDAO.findById(1);
         assertNotNull(userFromDAO);
         assertNotNull(userFromDAO.getId());
         assertNotNull(userFromDAO.getEmail());
@@ -45,7 +45,7 @@ public class UserDAORemoteImplTest {
 
     @Test
     public void testCreateUser() throws Exception {
-        User created = userDAORemote.persist(new User("Test@Test.no", "Test12345", "Student"));
+        User created = userDAO.persist(new User("Test@Test.no", "Test12345", "Student"));
         assertNotNull(created);
         assertTrue(created.getId() > 0);
     }
@@ -53,17 +53,17 @@ public class UserDAORemoteImplTest {
     @Test
     public void testUpdateUser() throws Exception {
         final int ID = 1;
-        User user = userDAORemote.findById(ID);
+        User user = userDAO.findById(ID);
         String OLD_PASSWORD = user.getPassword();
 
         user.setPassword("TestNy123");
-        userDAORemote.update(user);
-        assertNotEquals(OLD_PASSWORD, userDAORemote.findById(ID).getPassword());
+        userDAO.update(user);
+        assertNotEquals(OLD_PASSWORD, userDAO.findById(ID).getPassword());
     }
 
     @Test
     public void testGetAllUsers() throws Exception {
-        List<User> userList = userDAORemote.getAllUsers();
+        List<User> userList = userDAO.getAll();
         userList.forEach(user -> System.out.println(user));
         assertNotNull(userList);
         assertTrue(userList.size() > 0);
@@ -72,8 +72,20 @@ public class UserDAORemoteImplTest {
     @Test
     public void testDeleteUser() throws Exception {
         final int ID = 1;
-        User userToDelete = userDAORemote.findById(ID);
-        assertTrue(userDAORemote.remove(userToDelete));
-        assertNull(userDAORemote.findById(ID));
+        User userToDelete = userDAO.findById(ID);
+        assertTrue(userDAO.remove(userToDelete));
+        assertNull(userDAO.findById(ID));
     }
+
+
+    @Before
+    public void begin() {
+        userDAO.getEntityManager().getTransaction().begin();
+    }
+
+    @After
+    public void commit(){
+        userDAO.getEntityManager().getTransaction().commit();
+    }
+
 }

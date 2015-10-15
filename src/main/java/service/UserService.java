@@ -1,8 +1,8 @@
 package service;
 
 import domain.User;
+import repository.GenericDAO;
 import repository.RemoteQualifier;
-import repository.UserDAO;
 
 import javax.inject.Inject;
 import java.util.List;
@@ -14,10 +14,10 @@ public class UserService {
 
     // Remove/Add Remote to switch between implementations
     @Inject  @RemoteQualifier
-    public UserDAO userDAO;
+    public GenericDAO<User> userDAO;
 
     public List<User> getAllUsers(){
-        return userDAO.getAllUsers();
+        return userDAO.getAll();
     }
 
     public User createUser(User user){

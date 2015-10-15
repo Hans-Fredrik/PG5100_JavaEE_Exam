@@ -94,6 +94,7 @@
                     </dependency>
                 </dependencies>
                 <configuration>
+                    <testFailureIgnore>false</testFailureIgnore>
                     <includes>
                         <include>**/*.class</include>
                     </includes>
