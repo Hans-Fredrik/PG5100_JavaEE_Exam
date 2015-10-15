@@ -21,27 +21,27 @@ public class UserService {
     }
 
     public User createUser(User user){
-        return userDAO.createUser(user);
+        return userDAO.persist(user);
     }
 
     public boolean deleteUserByID(int id){
         if(id < 0) return false;
 
-        User user = userDAO.getUser(id);
+        User user = userDAO.findById(id);
 
         if(user == null){
             return false;
         }
 
-        return userDAO.deleteUser(user);
+        return userDAO.remove(user);
     }
 
     public User updateUser(User user){
-        return userDAO.updateUser(user);
+        return userDAO.update(user);
     }
 
     public User getUserByID(int id){
-        return userDAO.getUser(id);
+        return userDAO.findById(id);
     }
 
 

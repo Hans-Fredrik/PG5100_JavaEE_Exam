@@ -32,13 +32,11 @@ public class User {
 
     }
 
-
     public User(String email, String password, String userType) {
         this.email = email;
         this.password = password;
         this.userType = userType;
     }
-
 
     public User(int id,String email, String password, String userType) {
         this.id = id;
@@ -46,8 +44,6 @@ public class User {
         this.password = password;
         this.userType = userType;
     }
-
-
 
     public int getId() {
         return id;

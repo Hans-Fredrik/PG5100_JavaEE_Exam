@@ -13,21 +13,21 @@ public class UserDAOLocalImplTest {
     @Test
     public void testCreateUser() throws Exception {
         User userToCreate = new User("test@nith.no", "testing", "Student");
-        assertNotNull(userDAOLocal.createUser(userToCreate));
+        assertNotNull(userDAOLocal.persist(userToCreate));
     }
 
     @Test
     public void testUpdateUser() throws Exception {
         User user = new User(1,"hans@NITH.no", "hansformers", "Teacher");
         user.setUserType("TESTER");
-        assertNotNull(userDAOLocal.updateUser(user));
+        assertNotNull(userDAOLocal.update(user));
 
-        assertEquals(userDAOLocal.getUser(1).getUserType(), user.getUserType());
+        assertEquals(userDAOLocal.findById(1).getUserType(), user.getUserType());
     }
 
     @Test
     public void testGetUser() throws Exception {
-        assertNotNull(userDAOLocal.getUser(1));
+        assertNotNull(userDAOLocal.findById(1));
     }
 
     @Test
@@ -39,7 +39,7 @@ public class UserDAOLocalImplTest {
     @Test
     public void testDeleteUser() throws Exception {
         User toDelete = new User(99, "test@email.no", "Ingen", "Tester");
-        userDAOLocal.createUser(toDelete);
-        assertTrue(userDAOLocal.deleteUser(toDelete));
+        userDAOLocal.persist(toDelete);
+        assertTrue(userDAOLocal.remove(toDelete));
     }
 }

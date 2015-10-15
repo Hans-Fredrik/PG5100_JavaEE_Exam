@@ -41,20 +41,16 @@ public class UserServiceTest {
     public void testDeleteUserByID() throws Exception {
         assertFalse(userService.deleteUserByID(-1));
 
-        when(userService.userDAO.getUser(999999)).thenReturn(null);
+        when(userService.userDAO.findById(999999)).thenReturn(null);
 
         assertFalse(userService.deleteUserByID(99999));
 
-        when(userService.userDAO.getUser(1)).thenReturn(new User(1, "test", "test", "test"));
+        when(userService.userDAO.findById(1)).thenReturn(new User(1, "test", "test", "test"));
 
         assertNotNull(userService.deleteUserByID(1));
 
-        verify(userService.userDAO, atLeastOnce()).deleteUser(any());
-
+        verify(userService.userDAO, atLeastOnce()).remove(any());
     }
-
-
-
 
     @Test
     public void testUpdateUser() throws Exception {

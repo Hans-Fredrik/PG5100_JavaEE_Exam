@@ -7,11 +7,8 @@ import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.experimental.categories.Category;
-import service.UserService;
 
 import javax.enterprise.inject.Instance;
-import javax.inject.Inject;
-import javax.persistence.*;
 
 import java.util.List;
 
@@ -36,7 +33,7 @@ public class UserDAORemoteImplTest {
 
     @Test
     public void testGetUser() throws Exception {
-        User userFromDAO = userDAORemote.getUser(1);
+        User userFromDAO = userDAORemote.findById(1);
         assertNotNull(userFromDAO);
         assertNotNull(userFromDAO.getId());
         assertNotNull(userFromDAO.getEmail());
@@ -48,7 +45,7 @@ public class UserDAORemoteImplTest {
 
     @Test
     public void testCreateUser() throws Exception {
-        User created = userDAORemote.createUser(new User("Test@Test.no", "Test12345", "Student"));
+        User created = userDAORemote.persist(new User("Test@Test.no", "Test12345", "Student"));
         assertNotNull(created);
         assertTrue(created.getId() > 0);
     }
@@ -56,12 +53,12 @@ public class UserDAORemoteImplTest {
     @Test
     public void testUpdateUser() throws Exception {
         final int ID = 1;
-        User user = userDAORemote.getUser(ID);
+        User user = userDAORemote.findById(ID);
         String OLD_PASSWORD = user.getPassword();
 
         user.setPassword("TestNy123");
-        userDAORemote.updateUser(user);
-        assertNotEquals(OLD_PASSWORD, userDAORemote.getUser(ID).getPassword());
+        userDAORemote.update(user);
+        assertNotEquals(OLD_PASSWORD, userDAORemote.findById(ID).getPassword());
     }
 
     @Test
@@ -75,8 +72,8 @@ public class UserDAORemoteImplTest {
     @Test
     public void testDeleteUser() throws Exception {
         final int ID = 1;
-        User userToDelete = userDAORemote.getUser(ID);
-        assertTrue(userDAORemote.deleteUser(userToDelete));
-        assertNull(userDAORemote.getUser(ID));
+        User userToDelete = userDAORemote.findById(ID);
+        assertTrue(userDAORemote.remove(userToDelete));
+        assertNull(userDAORemote.findById(ID));
     }
 }

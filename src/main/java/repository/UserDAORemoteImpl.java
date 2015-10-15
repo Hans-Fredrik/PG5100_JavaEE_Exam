@@ -30,14 +30,14 @@ public class UserDAORemoteImpl implements UserDAO {
 
 
     @Override
-    public User createUser(User user) {
+    public User persist(User user) {
         entityManager.persist(user);
         return user;
     }
 
 
     @Override
-    public User updateUser(User user) {
+    public User update(User user) {
         User updated = entityManager.find(User.class, user.getId());
         updated.setEmail(user.getEmail());
         updated.setPassword(user.getPassword());
@@ -47,7 +47,7 @@ public class UserDAORemoteImpl implements UserDAO {
 
 
     @Override
-    public User getUser(int id) {
+    public User findById(int id) {
         return entityManager.find(User.class, id);
     }
 
@@ -61,7 +61,7 @@ public class UserDAORemoteImpl implements UserDAO {
 
 
     @Override
-    public boolean deleteUser(User user) {
+    public boolean remove(User user) {
         entityManager.remove(entityManager.find(User.class, user.getId()));
         return !entityManager.contains(user);
     }

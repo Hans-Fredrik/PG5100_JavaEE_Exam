@@ -9,14 +9,14 @@ import java.util.List;
  */
 public interface UserDAO {
 
-    User createUser(User user);
+    User persist(User user);
 
-    User updateUser(User user);
+    User update(User user);
 
-    User getUser(int id);
+    User findById(int id);
 
     List<User> getAllUsers();
 
-    boolean deleteUser(User user);
+    boolean remove(User user);
 
 }

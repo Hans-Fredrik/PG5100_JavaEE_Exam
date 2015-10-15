@@ -21,7 +21,7 @@ public class UserDAOLocalImpl implements UserDAO {
     }
 
     @Override
-    public User createUser(User user) {
+    public User persist(User user) {
         if(users.add(user)){
             return user;
         }
@@ -29,7 +29,7 @@ public class UserDAOLocalImpl implements UserDAO {
     }
 
     @Override
-    public User updateUser(User user) {
+    public User update(User user) {
         if(users.contains(user)){
             users.remove(user);
              users.add(user);
@@ -39,7 +39,7 @@ public class UserDAOLocalImpl implements UserDAO {
     }
 
     @Override
-    public User getUser(int id) {
+    public User findById(int id) {
         return users.stream().filter(user -> user.getId() == id).findFirst().get();
     }
 
@@ -49,7 +49,7 @@ public class UserDAOLocalImpl implements UserDAO {
     }
 
     @Override
-    public boolean deleteUser(User user) {
+    public boolean remove(User user) {
         return users.remove(user);
     }
 
