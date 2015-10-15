@@ -14,54 +14,18 @@ import java.util.List;
  */
 @RemoteQualifier
 @Stateful
-public class UserDAO implements GenericDAO<User> {
+public class UserDAO extends GenericDAOImpl<User>{
 
-    @PersistenceContext(unitName = "egentrening")
-    private EntityManager entityManager;
-
-    public UserDAO(){
-        entityManager =  Persistence.createEntityManagerFactory("egentrening").createEntityManager();
+    public UserDAO() {
+        super(User.class);
     }
 
-    @Override
-    public User persist(User user) {
-        entityManager.persist(user);
-        return user;
-    }
-
-    @Override
-    public User update(User user) {
-        return entityManager.merge(user);
-    }
-
-
-    @Override
-    public User findById(int id) {
-        return entityManager.find(User.class, id);
-    }
-
-
-    @Override
-    public List<User> getAll() {
-        Query findAll = entityManager.createNamedQuery("findAll");
-        List<User> userList = findAll.getResultList();
-        return userList;
-    }
-
-    @Override
-    public boolean remove(User user) {
-        entityManager.remove(entityManager.find(User.class, user.getId()));
-        return !entityManager.contains(user);
-    }
-
-
-    /*
     @AroundInvoke
     private Object intercept(InvocationContext ic) throws Exception {
         if(ic.getMethod().getName().equals("close")) return ic.proceed();
 
         System.out.println(UserDAO.class.getSimpleName() + " - " + ic.getMethod().getName() + " transaction begin");
-        EntityTransaction entityTransaction = entityManager.getTransaction();
+        EntityTransaction entityTransaction = this.getEntityManager().getTransaction();
         entityTransaction.begin();
 
         try {
@@ -70,13 +34,6 @@ public class UserDAO implements GenericDAO<User> {
             System.out.println(UserDAO.class.getSimpleName() + " - " + ic.getMethod().getName() + "transaction commit");
             entityTransaction.commit();
         }
-    } */
-
-    public EntityManager getEntityManager() {
-        return entityManager;
     }
 
-    public void close(){
-        entityManager.close();
-    }
 }
