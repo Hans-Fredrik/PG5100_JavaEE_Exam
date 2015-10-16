@@ -77,6 +77,7 @@ public class UserDAOTest {
         assertNull(userDAO.findById(ID));
     }
 
+    /*
 
     @Before
     public void begin() {
@@ -87,5 +88,5 @@ public class UserDAOTest {
     public void commit(){
         userDAO.getEntityManager().getTransaction().commit();
     }
-
+    */
 }
