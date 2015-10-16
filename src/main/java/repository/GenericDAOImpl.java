@@ -1,6 +1,7 @@
 package repository;
 
 import javax.decorator.Decorator;
+import javax.ejb.Stateless;
 import javax.interceptor.AroundInvoke;
 import javax.interceptor.InvocationContext;
 import javax.persistence.EntityManager;
@@ -20,6 +21,7 @@ public abstract class GenericDAOImpl<T> implements GenericDAO<T> {
 
     @PersistenceContext(unitName = "egentrening")
     private EntityManager entityManager;
+
 
     public GenericDAOImpl(Class<T> entityClass){
         this.entityClass = entityClass;

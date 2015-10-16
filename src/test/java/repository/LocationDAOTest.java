@@ -76,7 +76,6 @@ public class LocationDAOTest {
     public void begin() {
         locationDAO.getEntityManager().getTransaction().begin();
     }
-
     @After
     public void commit(){
         locationDAO.getEntityManager().getTransaction().commit();

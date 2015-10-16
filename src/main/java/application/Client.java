@@ -5,7 +5,12 @@ import org.jboss.weld.environment.se.Weld;
 import org.jboss.weld.environment.se.WeldContainer;
 import repository.UserDAO;
 import service.UserService;
+
+import javax.ejb.embeddable.EJBContainer;
 import javax.enterprise.inject.Instance;
+import javax.inject.Inject;
+import javax.naming.Context;
+import javax.naming.NamingException;
 import java.util.Scanner;
 
 /**
@@ -13,11 +18,14 @@ import java.util.Scanner;
  */
 public class Client {
 
+    @Inject
     private UserService userService;
 
 
-    public Client(UserService userService) {
-        this.userService = userService;
+    public Client() {
+    }
+
+    public void start(){
 
         try(Scanner in = new Scanner(System.in)){
 
@@ -51,6 +59,7 @@ public class Client {
         if(userService.userDAO instanceof UserDAO){
             ((UserDAO) userService.userDAO).close();
         }
+
 
     }
 
@@ -113,13 +122,10 @@ public class Client {
     }
 
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws NamingException {
         WeldContainer container = new Weld().initialize();
-        Instance<UserService> service = container.instance().select(UserService.class);
-
-        UserService userService1 = service.get();
-
-        new Client(userService1);
+        Instance<Client> client = container.instance().select(Client.class);
+        client.get().start();
 
         System.exit(0);
     }
