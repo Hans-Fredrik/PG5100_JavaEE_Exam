@@ -23,6 +23,9 @@ public abstract class GenericDAOImpl<T> implements GenericDAO<T> {
     private EntityManager entityManager;
 
 
+    public GenericDAOImpl() {
+    }
+
     public GenericDAOImpl(Class<T> entityClass){
         this.entityClass = entityClass;
         entityManager = Persistence.createEntityManagerFactory("egentrening").createEntityManager();

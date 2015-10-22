@@ -6,7 +6,7 @@
              version="2.1">
 
 
-    <persistence-unit name="egentrening">
+    <persistence-unit name="egentrening" transaction-type="JTA">
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <class>domain.User</class>
         <class>domain.Location</class>
