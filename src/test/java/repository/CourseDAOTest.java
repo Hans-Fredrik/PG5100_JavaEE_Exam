@@ -10,6 +10,9 @@ import org.junit.Before;
 import org.junit.Test;
 
 import javax.enterprise.inject.Instance;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,15 +22,21 @@ import static org.junit.Assert.*;
 public class CourseDAOTest {
 
 
+    private EntityManagerFactory entityManagerFactory;
+    private EntityManager entityManager;
     private CourseDAO courseDAO;
 
     @Before
     public void setUp() throws Exception {
-        WeldContainer container = new Weld().initialize();
-        Instance<CourseDAO> service = container.instance().select(CourseDAO.class);
-        courseDAO = service.get();
+        entityManagerFactory = Persistence.createEntityManagerFactory("egentrening");
+        entityManager = entityManagerFactory.createEntityManager();
+        courseDAO = new CourseDAO(entityManager);
     }
 
+    @After
+    public void tearDown() throws Exception {
+        courseDAO.close();
+    }
 
     @Test
     public void testPersist() throws Exception {
@@ -69,6 +78,9 @@ public class CourseDAOTest {
         List<Course> courseList = courseDAO.getAll();
         assertNotNull(courseList);
         assertTrue(courseList.size() > 0);
+
+        Course course = courseDAO.findById(1);
+        course.getUsers().forEach(u -> System.out.println(u));
     }
 
     @Test
@@ -86,13 +98,6 @@ public class CourseDAOTest {
         userList.add(new User("test2@test.no", "HeiTest29", "Tester"));
         Course course = courseDAO.persist(new Course("PG5100", userList));
     }
-
-
-    @After
-    public void tearDown() throws Exception {
-        courseDAO.close();
-    }
-
 
     @Before
     public void begin() {

@@ -9,6 +9,9 @@ import org.junit.Test;
 import org.junit.experimental.categories.Category;
 
 import javax.enterprise.inject.Instance;
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
 
 import java.util.List;
 
@@ -17,13 +20,16 @@ import static org.junit.Assert.*;
 @Category(IntegrationTest.class)
 public class LocationDAOTest {
 
+
+    private EntityManagerFactory entityManagerFactory;
+    private EntityManager entityManager;
     private LocationDAO locationDAO;
 
     @Before
     public void setUp() throws Exception {
-        WeldContainer container = new Weld().initialize();
-        Instance<LocationDAO> service = container.instance().select(LocationDAO.class);
-        locationDAO = service.get();
+        entityManagerFactory = Persistence.createEntityManagerFactory("egentrening");
+        entityManager = entityManagerFactory.createEntityManager();
+        locationDAO = new LocationDAO(entityManager);
     }
 
     @After

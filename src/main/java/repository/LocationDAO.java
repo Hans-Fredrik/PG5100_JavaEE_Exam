@@ -1,6 +1,7 @@
 package repository;
 
 import domain.Location;
+import domain.User;
 
 import javax.ejb.Stateless;
 import javax.interceptor.AroundInvoke;
@@ -19,6 +20,10 @@ public class LocationDAO extends GenericDAOImpl<Location>{
 
     public LocationDAO() {
         super(Location.class);
+    }
+
+    public LocationDAO(EntityManager entityManager){
+        super(entityManager, Location.class);
     }
 
 }

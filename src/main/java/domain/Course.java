@@ -24,6 +24,7 @@ public class Course {
     @JoinColumn(name = "FK_Location")
     private Location location;
 
+    // @valid for å validere under objekt..
     @ManyToMany(cascade = CascadeType.PERSIST)
     @JoinTable(name = "USR_SUB")
     @Size(min = 0, max = 100)
