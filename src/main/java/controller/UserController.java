@@ -40,10 +40,15 @@ public class UserController {
         userDAO.persist(user);
     }
 
+    public void delete(User user){
+        userDAO.remove(user);
+    }
+
     public List<User> getAll(){
         System.out.println("getAll()");
         System.out.println(userDAO.getAll());
         return userDAO.getAll();
     }
+
 
 }

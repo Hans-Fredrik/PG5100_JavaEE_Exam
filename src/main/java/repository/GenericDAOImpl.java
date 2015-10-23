@@ -58,8 +58,13 @@ public abstract class GenericDAOImpl<T> implements GenericDAO<T> {
 
     @Override
     public boolean remove(T entity) {
-        entityManager.remove(entity);
-        return !entityManager.contains(entity);
+        if(entityManager.contains(entity)){
+            entityManager.remove(entity);
+        }else{
+            entityManager.remove(entityManager.merge(entity));
+        }
+
+        return  !entityManager.contains(entity);
     }
 
 

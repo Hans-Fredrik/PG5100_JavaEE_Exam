@@ -14,4 +14,8 @@ public class NavigationController {
     public String proccessHomePage(){
         return "index";
     }
+
+    public String proccessCoursePage(){
+        return "courses";
+    }
 }
