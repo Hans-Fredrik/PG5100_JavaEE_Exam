@@ -24,14 +24,14 @@ public class CourseTest {
 
     @Test
     public void testValidInput() throws Exception {
-        Course course = new Course("PG5100 Java", null);
+        Course course = new Course("PG5100 Java", null, null);
         Set<ConstraintViolation<Course>> violations = validator.validate(course);
         assertEquals(0, violations.size());
     }
 
     @Test
     public void testInvalidInputName() throws Exception {
-        Course course = new Course(null, null);
+        Course course = new Course(null, null, null);
         Set<ConstraintViolation<Course>> violations = validator.validate(course);
         assertEquals(1, violations.size());
     }

@@ -43,7 +43,7 @@ public class CourseDAOTest {
         List<User> userList = new ArrayList<>();
         userList.add(new User("test@test.no", "HeiTest92", "Tester"));
         userList.add(new User("test2@test.no", "HeiTest29", "Tester"));
-        Course course = courseDAO.persist(new Course("PG5100", userList));
+        Course course = courseDAO.persist(new Course("PG5100", userList, null));
 
         assertNotNull(course);
         assertNotNull(course.getName());
@@ -96,7 +96,7 @@ public class CourseDAOTest {
         List<User> userList = new ArrayList<>();
         userList.add(new User("test@test.no", "HeiTest92", "Tester"));
         userList.add(new User("test2@test.no", "HeiTest29", "Tester"));
-        Course course = courseDAO.persist(new Course("PG5100", userList));
+        Course course = courseDAO.persist(new Course("PG5100", userList, null));
     }
 
     @Before

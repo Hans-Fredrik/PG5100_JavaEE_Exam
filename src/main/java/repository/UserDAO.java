@@ -13,7 +13,6 @@ import java.util.List;
 /**
  * Created by hffb on 17/09/15.
  */
-@RemoteQualifier
 @Stateless
 public class UserDAO extends GenericDAOImpl<User>{
 

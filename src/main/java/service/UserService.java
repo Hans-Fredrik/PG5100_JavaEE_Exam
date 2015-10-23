@@ -13,8 +13,7 @@ import java.util.List;
  */
 public class UserService {
 
-    // Remove/Add Remote to switch between implementations
-    @Inject @RemoteQualifier
+    @Inject
     public UserDAO userDAO;
 
     public List<User> getAllUsers(){

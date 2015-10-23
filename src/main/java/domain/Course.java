@@ -35,9 +35,10 @@ public class Course {
 
     }
 
-    public Course(String name, List<User> users) {
+    public Course(String name, List<User> users, Location location) {
         this.name = name;
         this.users = users;
+        this.location = location;
     }
 
     public int getId() {

@@ -1,0 +1,100 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+<h:head>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" type="text/javascript"/>
+
+    <h:body>
+
+        <title>User page</title>
+
+        <div class="container">
+            <h3>New user</h3><br/>
+
+            <h:form>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-1">
+                            <h:outputLabel value="Email: "/>
+                        </div>
+                        <div class="col-md-2">
+                            <h:inputText validatorMessage="Invalid email" id="email" value="#{userController.user.email}" />
+                        </div>
+                        <div class="col-md-3">
+                            <h:message for="email"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-1">
+                            <h:outputLabel value="Password: "/>
+                        </div>
+                        <div class="col-md-2">
+                            <h:inputSecret validatorMessage="4-16 numbers and characters" id="password" value="#{userController.user.password}" />
+                        </div>
+                        <div class="col-md-3">
+                            <h:message for="password"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-1">
+                            <h:outputLabel value="Type: "/>
+                        </div>
+                        <div class="col-md-2">
+                            <h:selectOneMenu class="form-control" value="#{userController.user.userType}">
+                            <f:selectItem itemValue="Student" itemLabel="Student" />
+                            <f:selectItem itemValue="Teacher" itemLabel="Teacher" />
+                            </h:selectOneMenu>
+                        </div>
+                    </div>
+                </div>
+
+                <h:commandButton class="btn btn-default" action="#{userController.persist()}" value="Create user"/>
+            </h:form>
+
+        </div>
+
+
+
+        <div class="container">
+            <h4>Table over users: </h4>
+            <h:dataTable value="#{userController.getAll()}" var="user"
+                         styleClass="table table-bordered table-hover">
+                <h:column>
+                    <f:facet name="header">User ID:</f:facet>
+                    #{user.id}
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Email</f:facet>
+                    #{user.email}
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">User type</f:facet>
+                    #{user.userType}
+                </h:column>
+
+            </h:dataTable>
+
+            <h:form>
+                <h:commandButton class="btn btn-default" action="#{navigationController.proccessHomePage}" value="Back"/>
+            </h:form>
+        </div>
+
+    </h:body>
+</h:head>
+
+</html>
