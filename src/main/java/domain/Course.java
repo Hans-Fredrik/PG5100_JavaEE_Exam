@@ -18,6 +18,7 @@ public class Course {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
     @NotNull
+    @Size(min = 1)
     private String name;
 
     @ManyToOne(cascade = CascadeType.PERSIST)
@@ -25,7 +26,7 @@ public class Course {
     private Location location;
 
     // @valid for å validere under objekt..
-    @ManyToMany(cascade = CascadeType.PERSIST)
+    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "USR_SUB")
     @Size(min = 0, max = 100)
     private List<User> users;

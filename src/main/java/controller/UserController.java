@@ -44,11 +44,13 @@ public class UserController {
         userDAO.remove(user);
     }
 
-    public List<User> getAll(){
-        System.out.println("getAll()");
-        System.out.println(userDAO.getAll());
-        return userDAO.getAll();
+    public void edit(User user){
+        System.out.println("Edit(u)" + user.toString());
+        userDAO.update(user);
     }
 
+    public List<User> getAll(){
+        return userDAO.getAll();
+    }
 
 }

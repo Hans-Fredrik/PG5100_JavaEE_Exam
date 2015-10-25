@@ -3,6 +3,7 @@ package repository;
 import domain.Course;
 import domain.Location;
 import domain.User;
+import org.hibernate.jpa.criteria.expression.function.AggregationFunction;
 import org.jboss.weld.environment.se.Weld;
 import org.jboss.weld.environment.se.WeldContainer;
 import org.junit.After;
@@ -43,7 +44,10 @@ public class CourseDAOTest {
         List<User> userList = new ArrayList<>();
         userList.add(new User("test@test.no", "HeiTest92", "Tester"));
         userList.add(new User("test2@test.no", "HeiTest29", "Tester"));
+
+        courseDAO.getEntityManager().getTransaction().begin();
         Course course = courseDAO.persist(new Course("PG5100", userList, null));
+        courseDAO.getEntityManager().getTransaction().commit();
 
         assertNotNull(course);
         assertNotNull(course.getName());
@@ -56,12 +60,36 @@ public class CourseDAOTest {
     }
 
     @Test
+    public void testAddUserToPersistedCourse() throws Exception {
+        courseDAO.getEntityManager().getTransaction().begin();
+        Course course = courseDAO.persist(new Course("PG5100", new ArrayList<User>(), null));
+        courseDAO.getEntityManager().getTransaction().commit();
+
+
+
+        Course course1 = courseDAO.findById(course.getId());
+        courseDAO.getEntityManager().getTransaction().begin();
+        course1.getUsers().add(new User("hans@hans.no", "hansH923", "Teacher"));
+        course1.getUsers().add(new User("hans@hans.no", "hansH923", "Teacher"));
+        course1.getUsers().add(new User("hans@hans.no", "hansH923", "Teacher"));
+        courseDAO.getEntityManager().getTransaction().commit();
+
+        assertNotNull(course1.getUsers());
+        assertTrue(course.getUsers().size() > 0);
+        assertTrue(course.getUsers().size() == 3);
+        course1.getUsers().forEach(u -> System.out.println(u));
+    }
+
+    @Test
     public void testUpdate() throws Exception {
         addCourseData();
         Course course = courseDAO.findById(1);
         course.setName("Unit-testing");
 
+        courseDAO.getEntityManager().getTransaction().begin();
         Course courseAfterUpdate = courseDAO.update(course);
+        courseDAO.getEntityManager().getTransaction().commit();
+
         assertEquals(courseAfterUpdate.getName(), course.getName());
     }
 
@@ -74,13 +102,9 @@ public class CourseDAOTest {
 
     @Test
     public void testGetAll() throws Exception {
-        addCourseData();
         List<Course> courseList = courseDAO.getAll();
         assertNotNull(courseList);
         assertTrue(courseList.size() > 0);
-
-        Course course = courseDAO.findById(1);
-        course.getUsers().forEach(u -> System.out.println(u));
     }
 
     @Test
@@ -96,18 +120,9 @@ public class CourseDAOTest {
         List<User> userList = new ArrayList<>();
         userList.add(new User("test@test.no", "HeiTest92", "Tester"));
         userList.add(new User("test2@test.no", "HeiTest29", "Tester"));
-        Course course = courseDAO.persist(new Course("PG5100", userList, null));
-    }
 
-    @Before
-    public void begin() {
-        System.out.println("Begin...");
         courseDAO.getEntityManager().getTransaction().begin();
-    }
-
-    @After
-    public void commit(){
-        System.out.println("Commit...");
+        Course course = courseDAO.persist(new Course("PG5100", userList, null));
         courseDAO.getEntityManager().getTransaction().commit();
     }
 
