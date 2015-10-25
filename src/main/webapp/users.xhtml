@@ -4,12 +4,17 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 <h:head>
+    <title>User page</title>
+
+    <script src="//code.jquery.com/jquery-1.11.3.min.js" type="text/javascript"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" type="text/javascript"/>
-    <title>User page</title>
+
+
 </h:head>
 
 <h:body>
@@ -103,16 +108,31 @@
             </h:column>
 
             <h:column>
+                <f:facet name="header">Registered in course:</f:facet>
+                <c:forEach var="course" items="#{user.getCourses()}">
+                    #{course.id}
+                    #{course.name}
+                </c:forEach>
+            </h:column>
+
+            <h:column>
                 <f:facet name="header">Action</f:facet>
                 <h:form>
-
                     <div class="row">
                         <div class="col-md-1">
                             <h:commandLink class='glyphicon glyphicon-remove' action="#{userController.delete(user)}"/>
                         </div>
                     </div>
-
+                    <c:forEach var="course1" items="#{courseController.all}">
+                        <div class="row">
+                            <div class="col-md-1">
+                                <h:commandLink value="#{course1.name}" action="#{userController.addCourse(course1, user)}"/>
+                            </div>
+                        </div>
+                    </c:forEach>
                 </h:form>
+
+
             </h:column>
         </h:dataTable>
 

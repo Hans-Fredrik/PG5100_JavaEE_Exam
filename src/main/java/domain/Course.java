@@ -26,7 +26,7 @@ public class Course {
     private Location location;
 
     // @valid for å validere under objekt..
-    @ManyToMany(cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
     @JoinTable(name = "USR_SUB")
     @Size(min = 0, max = 100)
     private List<User> users;

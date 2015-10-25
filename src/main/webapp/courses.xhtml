@@ -3,12 +3,13 @@
         "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
-      xmlns:f="http://java.sun.com/jsf/core"
-      xmlns:p="http://primefaces.org/ui">
+      xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui"
+      xmlns:c="http://java.sun.com/jsp/jstl/core">
 
 <h:head>
     <title>Courses</title>
 
+    <script src="//code.jquery.com/jquery-1.11.3.min.js" type="text/javascript"/>
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" type="text/javascript"/>
 
@@ -49,24 +50,13 @@
                 </div>
             </div>
 
-            <!--<div class="form-group">-->
-                <!--<div class="row">-->
-                    <!--<div class="col-md-1">-->
-                        <!--<h:outputLabel value="Type: "/>-->
-                    <!--</div>-->
-                    <!--<div class="col-md-2">-->
-                        <!--<h:selectOneMenu class="form-control" value="#{userController.user.userType}">-->
-                            <!--<f:selectItem itemValue="Student" itemLabel="Student" />-->
-                            <!--<f:selectItem itemValue="Teacher" itemLabel="Teacher" />-->
-                        <!--</h:selectOneMenu>-->
-                    <!--</div>-->
-                <!--</div>-->
-            <!--</div>-->
+
 
             <h:commandButton class="btn btn-default" action="#{courseController.persist()}" value="Create courser"/>
         </h:form>
 
     </div>
+
 
 
     <div class="container">
@@ -86,15 +76,15 @@
             <h:column>
                 <f:facet name="header">Action</f:facet>
                 <h:form>
-
                     <div class="row">
                         <div class="col-md-1">
                             <h:commandLink class='glyphicon glyphicon-remove' action="#{courseController.delete(course)}"/>
                         </div>
                     </div>
-
                 </h:form>
             </h:column>
+
+
         </h:dataTable>
 
         <h:form>
@@ -102,8 +92,6 @@
         </h:form>
     </div>
 
-
 </h:body>
-
 
 </html>

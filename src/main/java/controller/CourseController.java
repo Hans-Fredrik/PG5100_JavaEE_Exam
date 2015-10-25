@@ -36,6 +36,7 @@ public class CourseController {
 
     public void persist(){
         courseDAO.persist(course);
+        course.setName("");
     }
 
     public void delete(Course course){

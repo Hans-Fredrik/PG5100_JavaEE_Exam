@@ -1,16 +1,11 @@
 package repository;
 
 import domain.Course;
-import domain.Location;
 import domain.User;
-import org.hibernate.jpa.criteria.expression.function.AggregationFunction;
-import org.jboss.weld.environment.se.Weld;
-import org.jboss.weld.environment.se.WeldContainer;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
-import javax.enterprise.inject.Instance;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;

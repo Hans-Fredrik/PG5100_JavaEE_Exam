@@ -1,8 +1,7 @@
 package repository;
 
+import domain.Course;
 import domain.User;
-import org.jboss.weld.environment.se.Weld;
-import org.jboss.weld.environment.se.WeldContainer;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -47,10 +46,24 @@ public class UserDAOTest {
         assertTrue(userFromDAO.getId() > 0);
     }
 
+    @Test
+    public void testUpdateUserAndAddCourses() throws Exception {
+        User user = userDAO.findById(1);
+        user.getCourses().add(new Course("PG5100", null, null));
+
+        entityManager.getTransaction().begin();
+        userDAO.update(user);
+        entityManager.getTransaction().commit();
+
+        User userBack = userDAO.findById(1);
+        assertTrue(userBack.getCourses().size() > 0);
+    }
 
     @Test
     public void testCreateUser() throws Exception {
+        entityManager.getTransaction().begin();
         User created = userDAO.persist(new User("Test@Test.no", "Test12345", "Student"));
+        entityManager.getTransaction().commit();
         assertNotNull(created);
         assertTrue(created.getId() > 0);
     }
@@ -78,20 +91,10 @@ public class UserDAOTest {
     public void testDeleteUser() throws Exception {
         final int ID = 1;
         User userToDelete = userDAO.findById(ID);
+        entityManager.getTransaction().begin();
         assertTrue(userDAO.remove(userToDelete));
+        entityManager.getTransaction().commit();
         assertNull(userDAO.findById(ID));
-    }
-
-
-
-    @Before
-    public void begin() {
-        userDAO.getEntityManager().getTransaction().begin();
-    }
-
-    @After
-    public void commit(){
-        userDAO.getEntityManager().getTransaction().commit();
     }
 
 }
