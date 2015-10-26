@@ -29,7 +29,7 @@ public class User {
     private String password;
     private String userType;
 
-    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "users")
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "users", cascade = {CascadeType.DETACH})
     private List<Course> courses;
 
     public User(){
@@ -88,6 +88,14 @@ public class User {
     public void setCourses(List<Course> courses) {
         this.courses = courses;
     }
+
+    @PreRemove
+    private void removeCourseFromUser(){
+        for(Course course: this.courses){
+            course.getUsers().remove(this);
+        }
+    }
+
     @Override
     public String toString() {
         return "User{" +

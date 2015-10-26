@@ -12,6 +12,7 @@ import javax.faces.bean.SessionScoped;
 import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
 import javax.inject.Named;
+import javax.persistence.PreRemove;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -76,6 +77,4 @@ public class UserController {
         System.out.println("DEBUG1234:");
         courseToDebug.getUsers().forEach(u -> System.out.println(u));
     }
-
-
 }

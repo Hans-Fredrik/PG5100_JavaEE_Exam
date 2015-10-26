@@ -1,5 +1,6 @@
 package repository;
 
+import domain.Course;
 import domain.User;
 
 import javax.ejb.Stateful;
@@ -24,4 +25,5 @@ public class UserDAO extends GenericDAOImpl<User>{
     public UserDAO(EntityManager entityManager){
         super(entityManager, User.class);
     }
+
 }
