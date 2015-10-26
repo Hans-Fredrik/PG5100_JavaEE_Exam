@@ -67,6 +67,7 @@ public class UserController {
             course.setUsers(new ArrayList<>());
         }
 
+
         course.getUsers().add(user1);
         courseDAO.update(course);
 
@@ -75,5 +76,6 @@ public class UserController {
         System.out.println("DEBUG1234:");
         courseToDebug.getUsers().forEach(u -> System.out.println(u));
     }
+
 
 }

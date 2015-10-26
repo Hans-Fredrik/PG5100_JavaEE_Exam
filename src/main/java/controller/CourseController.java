@@ -1,6 +1,7 @@
 package controller;
 
 import domain.Course;
+import domain.User;
 import repository.CourseDAO;
 
 import javax.annotation.PostConstruct;
@@ -46,6 +47,18 @@ public class CourseController {
     public List<Course> getAll(){
         System.out.println("GetALL");
         return courseDAO.getAll();
+    }
+
+    public List<Course> getAllCoursesNotRegisteredIn(User user){
+        List<Course> filteredList = new ArrayList<>();
+
+        getAll().forEach(course ->{
+            if(!course.getUsers().contains(user)){
+                filteredList.add(course);
+            }
+        });
+
+        return filteredList;
     }
 
 }

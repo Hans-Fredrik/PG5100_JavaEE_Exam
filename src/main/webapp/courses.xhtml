@@ -4,7 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://java.sun.com/jsf/html"
       xmlns:f="http://java.sun.com/jsf/core" xmlns:p="http://primefaces.org/ui"
-      xmlns:c="http://java.sun.com/jsp/jstl/core">
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:ui="http://java.sun.com/jsf/facelets">
 
 <h:head>
     <title>Courses</title>
@@ -74,6 +75,14 @@
             </h:column>
 
             <h:column>
+                <f:facet name="header">Users:</f:facet>
+                <ui:repeat value="#{course.users}" var="item">
+                    (#{item.email})
+                </ui:repeat>
+            </h:column>
+
+
+            <h:column>
                 <f:facet name="header">Action</f:facet>
                 <h:form>
                     <div class="row">
@@ -83,9 +92,8 @@
                     </div>
                 </h:form>
             </h:column>
-
-
         </h:dataTable>
+
 
         <h:form>
             <h:commandButton class="btn btn-default" action="#{navigationController.proccessHomePage}" value="Back"/>

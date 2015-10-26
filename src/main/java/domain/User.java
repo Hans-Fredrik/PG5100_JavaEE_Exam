@@ -29,7 +29,7 @@ public class User {
     private String password;
     private String userType;
 
-    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "users", cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToMany(fetch = FetchType.EAGER, mappedBy = "users")
     private List<Course> courses;
 
     public User(){

@@ -6,7 +6,7 @@ INSERT INTO USER VALUES(null, 'Lise@NITH.no', 'heiLise', 'Student');
 INSERT INTO USER VALUES (null, 'testerdelete@t.no', 'Tester123', 'Tester');
 
 INSERT INTO COURSE (NAME) VALUES('PG5100 - Enterprise programmering 1');
-INSERT INTO COURSE (NAME) VALUES('BU5100 - Entepenørskap');
+INSERT INTO COURSE (NAME) VALUES('BU5100 - Entepenorskap');
 INSERT INTO COURSE (NAME) VALUES('PG5600 - IOS programmering');
 
 
