@@ -59,22 +59,13 @@ public class UserController {
     }
 
     public void addCourse(Course course, User userin){
-        System.out.println(userin.getId() + " --- --- --- -- -- -- - --- Going to add: " + course.getName());
 
-        User user1 = userDAO.findById(userin.getId());
-        System.out.println("HER HER HER HER : "+ user1.toString());
 
         if(course.getUsers() == null){
             course.setUsers(new ArrayList<>());
         }
 
-
-        course.getUsers().add(user1);
+        course.getUsers().add(userin);
         courseDAO.update(course);
-
-
-        Course courseToDebug = courseDAO.findById(course.getId());
-        System.out.println("DEBUG1234:");
-        courseToDebug.getUsers().forEach(u -> System.out.println(u));
     }
 }

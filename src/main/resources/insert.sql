@@ -4,6 +4,8 @@ INSERT INTO USER VALUES(null, 'Per@NITH.no', 'heiPer', 'Student');
 INSERT INTO USER VALUES(null, 'Ola@NITH.no', 'heiOla', 'Student');
 INSERT INTO USER VALUES(null, 'Lise@NITH.no', 'heiLise', 'Student');
 INSERT INTO USER VALUES (null, 'testerdelete@t.no', 'Tester123', 'Tester');
+INSERT INTO USER VALUES (null, 'Idar@vassdal.no', 'IdarSittPassord', 'Idar Club');
+
 
 
 INSERT INTO COURSE (NAME) VALUES('PG5100 - Enterprise programmering 1');

@@ -18,4 +18,8 @@ public class NavigationController {
     public String proccessCoursePage(){
         return "courses";
     }
+
+    public String proccessLocationPage(){
+        return "location";
+    }
 }

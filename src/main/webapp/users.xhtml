@@ -7,142 +7,117 @@
       xmlns:f="http://xmlns.jcp.org/jsf/core"
       xmlns:c="http://java.sun.com/jsp/jstl/core">
 
-<h:head>
-    <title>User page</title>
 
-    <script src="//code.jquery.com/jquery-1.11.3.min.js" type="text/javascript"/>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css"/>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js" type="text/javascript"/>
+<ui:composition template="PageTemplate.xhtml">
+    <ui:define name="title">Users</ui:define>
+    <ui:define name="content">
+        <div class="container">
+            <h3>New user</h3><br/>
 
+            <h:form>
 
-</h:head>
-
-<h:body>
-
-    <h:form>
-        <div class="navbar navbar-default navbar-fixed-top">
-            <div class="container">
-                <div class="collapse navbar-collapse">
-                    <ul class="nav navbar-nav">
-                        <li><h:commandLink value="Home" action="#{navigationController.proccessHomePage}"/></li>
-                        <li><h:commandLink value="Users" action="#{navigationController.proccessUsersPage}"/></li>
-                        <li><h:commandLink value="Courses" action="#{navigationController.proccessCoursePage}"/></li>
-                        <li><a href="#">Location</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
-    </h:form>
-
-
-    <div class="container">
-        <h3>New user</h3><br/>
-
-        <h:form>
-
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-md-1">
-                        <h:outputLabel value="Email: "/>
-                    </div>
-                    <div class="col-md-2">
-                        <h:inputText validatorMessage="Invalid email" id="email" value="#{userController.user.email}" />
-                    </div>
-                    <div class="col-md-3">
-                        <h:message for="email"/>
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-md-1">
-                        <h:outputLabel value="Password: "/>
-                    </div>
-                    <div class="col-md-2">
-                        <h:inputSecret validatorMessage="4-16 numbers and characters" id="password" value="#{userController.user.password}" />
-                    </div>
-                    <div class="col-md-3">
-                        <h:message for="password"/>
-                    </div>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <div class="row">
-                    <div class="col-md-1">
-                        <h:outputLabel value="Type: "/>
-                    </div>
-                    <div class="col-md-2">
-                        <h:selectOneMenu class="form-control" value="#{userController.user.userType}">
-                            <f:selectItem itemValue="Student" itemLabel="Student" />
-                            <f:selectItem itemValue="Teacher" itemLabel="Teacher" />
-                        </h:selectOneMenu>
-                    </div>
-                </div>
-            </div>
-
-            <h:commandButton class="btn btn-default" action="#{userController.persist()}" value="Create user"/>
-        </h:form>
-
-    </div>
-
-
-    <div class="container">
-        <h4>Table over users: </h4>
-        <h:dataTable id="table" value="#{userController.getAll()}" var="user"
-                     styleClass="table table-bordered table-hover">
-            <h:column>
-                <f:facet name="header">User ID:</f:facet>
-                #{user.id}
-            </h:column>
-
-            <h:column>
-                <f:facet name="header">Email</f:facet>
-                #{user.email}
-            </h:column>
-
-            <h:column>
-                <f:facet name="header">User type</f:facet>
-                #{user.userType}
-            </h:column>
-
-            <h:column>
-                <f:facet name="header">Registered in courses:</f:facet>
-
-                <ui:repeat value="#{user.courses}" var="course">
-                    (#{course.name})<br/>
-                </ui:repeat>
-            </h:column>
-
-
-            <h:column>
-                <f:facet name="header">Action</f:facet>
-                <h:form>
+                <div class="form-group">
                     <div class="row">
                         <div class="col-md-1">
-                            <h:commandLink class='glyphicon glyphicon-remove' action="#{userController.delete(user)}"/>
+                            <h:outputLabel value="Email: "/>
+                        </div>
+                        <div class="col-md-2">
+                            <h:inputText validatorMessage="Invalid email" id="email" value="#{userController.user.email}" />
+                        </div>
+                        <div class="col-md-3">
+                            <h:message for="email"/>
                         </div>
                     </div>
-                    <c:forEach var="course1" items="#{courseController.getAllCoursesNotRegisteredIn(user)}">
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-1">
+                            <h:outputLabel value="Password: "/>
+                        </div>
+                        <div class="col-md-2">
+                            <h:inputSecret validatorMessage="4-16 numbers and characters" id="password" value="#{userController.user.password}" />
+                        </div>
+                        <div class="col-md-3">
+                            <h:message for="password"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-1">
+                            <h:outputLabel value="Type: "/>
+                        </div>
+                        <div class="col-md-2">
+                            <h:selectOneMenu class="form-control" value="#{userController.user.userType}">
+                                <f:selectItem itemValue="Student" itemLabel="Student" />
+                                <f:selectItem itemValue="Teacher" itemLabel="Teacher" />
+                            </h:selectOneMenu>
+                        </div>
+                    </div>
+                </div>
+
+                <h:commandButton class="btn btn-default" action="#{userController.persist()}" value="Create user"/>
+            </h:form>
+
+        </div>
+
+
+        <div class="container">
+            <h4>Table over users: </h4>
+            <h:dataTable id="table" value="#{userController.getAll()}" var="user"
+                         styleClass="table table-bordered table-hover">
+                <h:column>
+                    <f:facet name="header">User ID:</f:facet>
+                    #{user.id}
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Email</f:facet>
+                    #{user.email}
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">User type</f:facet>
+                    #{user.userType}
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Registered in courses:</f:facet>
+
+                    <ui:repeat value="#{user.courses}" var="course">
+                        (#{course.name})<br/>
+                    </ui:repeat>
+                </h:column>
+
+
+                <h:column>
+                    <f:facet name="header">Action</f:facet>
+                    <h:form>
                         <div class="row">
-                            <div class="col-md-10">
-                                <h:commandLink value="#{course1.name}" action="#{userController.addCourse(course1, user)}"/>
+                            <div class="col-md-1">
+                                <h:commandLink class='glyphicon glyphicon-remove' action="#{userController.delete(user)}"/>
                             </div>
                         </div>
-                    </c:forEach>
-                </h:form>
-            </h:column>
+                        <c:forEach var="course1" items="#{courseController.getAllCoursesNotRegisteredIn(user)}">
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <h:commandLink value="#{course1.name}" action="#{userController.addCourse(course1, user)}"/>
+                                </div>
+                            </div>
+                        </c:forEach>
+                    </h:form>
+                </h:column>
 
 
-        </h:dataTable>
+            </h:dataTable>
 
-        <h:form>
-            <h:commandButton class="btn btn-default" action="#{navigationController.proccessHomePage}" value="Back"/>
-        </h:form>
-    </div>
-
-
-</h:body>
+            <h:form>
+                <h:commandButton class="btn btn-default" action="#{navigationController.proccessHomePage}" value="Back"/>
+            </h:form>
+        </div>
+    </ui:define>
+</ui:composition>
 
 </html>
