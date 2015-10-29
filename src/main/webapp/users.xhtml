@@ -103,7 +103,7 @@
                         <c:forEach var="course1" items="#{courseController.getAllCoursesNotRegisteredIn(user)}">
                             <div class="row">
                                 <div class="col-md-10">
-                                    <h:commandLink value="#{course1.name}" action="#{userController.addCourse(course1, user)}"/>
+                                    <h:commandLink value="#{course1.name}" action="#{courseController.addCourseToUser(course1, user)}"/>
                                 </div>
                             </div>
                         </c:forEach>

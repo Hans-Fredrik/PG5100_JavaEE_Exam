@@ -21,7 +21,7 @@ public class Course {
     @Size(min = 1)
     private String name;
 
-    @ManyToOne(cascade = CascadeType.PERSIST)
+    @ManyToOne(cascade = {CascadeType.PERSIST})
     @JoinColumn(name = "FK_Location")
     private Location location;
 
@@ -56,6 +56,14 @@ public class Course {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public Location getLocation() {
+        return location;
+    }
+
+    public void setLocation(Location location) {
+        this.location = location;
     }
 
     public List<User> getUsers() {

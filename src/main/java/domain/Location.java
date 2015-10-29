@@ -1,7 +1,9 @@
 package domain;
 
 import javax.persistence.*;
+import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
 
 /**
  * Created by hffb on 15/10/15.
@@ -15,8 +17,10 @@ public class Location {
     private int id;
 
     @NotNull
+    @Size(min = 1)
     private String room;
     @NotNull
+    @Size(min = 1)
     private String buildning;
 
 

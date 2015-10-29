@@ -23,13 +23,11 @@ import java.util.List;
 public class UserController {
 
     private final UserDAO userDAO;
-    private final CourseDAO courseDAO;
     private User user;
 
     @Inject
-    public UserController(UserDAO userDAO, CourseDAO courseDAO) {
+    public UserController(UserDAO userDAO) {
         this.userDAO = userDAO;
-        this.courseDAO = courseDAO;
     }
 
     @PostConstruct
@@ -49,8 +47,7 @@ public class UserController {
         userDAO.remove(user);
     }
 
-    public void edit(User user){
-        System.out.println("Edit(u)" + user.toString());
+    public void update(User user){
         userDAO.update(user);
     }
 
@@ -58,14 +55,4 @@ public class UserController {
         return userDAO.getAll();
     }
 
-    public void addCourse(Course course, User userin){
-
-
-        if(course.getUsers() == null){
-            course.setUsers(new ArrayList<>());
-        }
-
-        course.getUsers().add(userin);
-        courseDAO.update(course);
-    }
 }

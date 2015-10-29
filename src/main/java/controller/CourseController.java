@@ -1,6 +1,7 @@
 package controller;
 
 import domain.Course;
+import domain.Location;
 import domain.User;
 import repository.CourseDAO;
 
@@ -45,7 +46,6 @@ public class CourseController {
     }
 
     public List<Course> getAll(){
-        System.out.println("GetALL");
         return courseDAO.getAll();
     }
 
@@ -61,6 +61,24 @@ public class CourseController {
         return filteredList;
     }
 
+    public void addCourseToUser(Course course,User user){
+        if(course.getUsers() == null){
+            course.setUsers(new ArrayList<>());
+        }
 
+        course.getUsers().add(user);
+        courseDAO.update(course);
+
+    }
+
+    public void addLocation(Course course, Location location){
+        course.setLocation(location);
+        courseDAO.update(course);
+    }
+
+    public void removeLocation(Course course){
+        course.setLocation(null);
+        courseDAO.update(course);
+    }
 
 }

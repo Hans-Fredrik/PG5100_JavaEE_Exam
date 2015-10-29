@@ -42,13 +42,21 @@
             <h:dataTable id="table" value="#{courseController.getAll()}" var="course"
                          styleClass="table table-bordered table-hover">
                 <h:column>
-                    <f:facet name="header">Course ID:</f:facet>
+                    <f:facet name="header">ID:</f:facet>
                     #{course.id}
                 </h:column>
 
                 <h:column>
-                    <f:facet name="header">Course name:</f:facet>
+                    <f:facet name="header">Name:</f:facet>
                     #{course.name}
+                </h:column>
+
+                <h:column>
+                    <f:facet name="header">Location:</f:facet>
+                        <h:form rendered="#{course.location != null}">
+                            #{course.location.room}
+                            <h:commandLink  class='glyphicon glyphicon-remove'  action="#{courseController.removeLocation(course)}"/>
+                        </h:form>
                 </h:column>
 
                 <h:column>
@@ -67,10 +75,16 @@
                                 <h:commandLink class='glyphicon glyphicon-remove' action="#{courseController.delete(course)}"/>
                             </div>
                         </div>
+                        <ui:repeat value="#{locationController.getAllLocationsIfCourseDontHaveLocation(course)}" var="location">
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <h:commandLink value="Room: #{location.room}" action="#{courseController.addLocation(course,location)}"/>
+                                </div>
+                            </div>
+                        </ui:repeat>
                     </h:form>
                 </h:column>
             </h:dataTable>
-
 
             <h:form>
                 <h:commandButton class="btn btn-default" action="#{navigationController.proccessHomePage}" value="Back"/>

@@ -14,12 +14,11 @@ public class NavigationController {
     public String proccessHomePage(){
         return "index";
     }
-
     public String proccessCoursePage(){
         return "courses";
     }
-
     public String proccessLocationPage(){
         return "location";
     }
+
 }
