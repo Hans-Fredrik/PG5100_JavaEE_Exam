@@ -87,7 +87,10 @@
                     <f:facet name="header">Registered in courses:</f:facet>
 
                     <ui:repeat value="#{user.courses}" var="course">
-                        (#{course.name})<br/>
+                        <h:form>
+                            #{course.name}
+                            <h:commandLink class='glyphicon glyphicon-arrow-right'  action="#{courseController.removeCourseFromUser(course, user)}"/>
+                        </h:form>
                     </ui:repeat>
                 </h:column>
 
@@ -100,13 +103,12 @@
                                 <h:commandLink class='glyphicon glyphicon-remove' action="#{userController.delete(user)}"/>
                             </div>
                         </div>
-                        <c:forEach var="course1" items="#{courseController.getAllCoursesNotRegisteredIn(user)}">
-                            <div class="row">
-                                <div class="col-md-10">
-                                    <h:commandLink value="#{course1.name}" action="#{courseController.addCourseToUser(course1, user)}"/>
-                                </div>
-                            </div>
-                        </c:forEach>
+
+                        <ui:repeat value="#{courseController.getAllCoursesNotRegisteredIn(user)}" var="course1">
+                                <h:commandLink value="#{course1.name}" action="#{courseController.addCourseToUser(course1, user)}"/>
+                                <br/>
+                        </ui:repeat>
+
                     </h:form>
                 </h:column>
 

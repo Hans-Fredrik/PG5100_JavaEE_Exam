@@ -71,6 +71,11 @@ public class CourseController {
 
     }
 
+    public void removeCourseFromUser(Course course, User user){
+        course.getUsers().remove(user);
+        courseDAO.update(course);
+    }
+
     public void addLocation(Course course, Location location){
         course.setLocation(location);
         courseDAO.update(course);
