@@ -2,6 +2,7 @@ package repository;
 
 import domain.Course;
 import domain.User;
+import domain.UserType;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -37,8 +38,8 @@ public class CourseDAOTest {
     @Test
     public void testPersist() throws Exception {
         List<User> userList = new ArrayList<>();
-        userList.add(new User("test@test.no", "HeiTest92", "Tester"));
-        userList.add(new User("test2@test.no", "HeiTest29", "Tester"));
+        userList.add(new User("test@test.no", "HeiTest92", UserType.STUDENT));
+        userList.add(new User("test2@test.no", "HeiTest29", UserType.TEACHER));
 
         courseDAO.getEntityManager().getTransaction().begin();
         Course course = courseDAO.persist(new Course("PG5100", userList, null));
@@ -64,9 +65,9 @@ public class CourseDAOTest {
 
         Course course1 = courseDAO.findById(course.getId());
         courseDAO.getEntityManager().getTransaction().begin();
-        course1.getUsers().add(new User("hans@hans.no", "hansH923", "Teacher"));
-        course1.getUsers().add(new User("hans@hans.no", "hansH923", "Teacher"));
-        course1.getUsers().add(new User("hans@hans.no", "hansH923", "Teacher"));
+        course1.getUsers().add(new User("hans@hans.no", "hansH923", UserType.TEACHER));
+        course1.getUsers().add(new User("hans@hans.no", "hansH923", UserType.TEACHER));
+        course1.getUsers().add(new User("hans@hans.no", "hansH923", UserType.TEACHER));
         courseDAO.getEntityManager().getTransaction().commit();
 
         assertNotNull(course1.getUsers());
@@ -113,8 +114,8 @@ public class CourseDAOTest {
 
     private void addCourseData(){
         List<User> userList = new ArrayList<>();
-        userList.add(new User("test@test.no", "HeiTest92", "Tester"));
-        userList.add(new User("test2@test.no", "HeiTest29", "Tester"));
+        userList.add(new User("test@test.no", "HeiTest92", UserType.TEACHER));
+        userList.add(new User("test2@test.no", "HeiTest29", UserType.STUDENT));
 
         courseDAO.getEntityManager().getTransaction().begin();
         Course course = courseDAO.persist(new Course("PG5100", userList, null));

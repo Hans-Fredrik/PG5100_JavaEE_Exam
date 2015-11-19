@@ -1,6 +1,7 @@
 package service;
 
 import domain.User;
+import domain.UserType;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -45,7 +46,7 @@ public class UserServiceTest {
 
         assertFalse(userService.deleteUserByID(99999));
 
-        when(userService.userDAO.findById(1)).thenReturn(new User(1, "test", "test", "test"));
+        when(userService.userDAO.findById(1)).thenReturn(new User(1, "test", "test", UserType.STUDENT));
 
         assertNotNull(userService.deleteUserByID(1));
 

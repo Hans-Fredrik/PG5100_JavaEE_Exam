@@ -27,7 +27,10 @@ public class User {
     @NotNull
     @Pattern(regexp = "^(?=.*\\d)(?=.*[a-z])(?=.*[A-Z]).{4,16}$")
     private String password;
-    private String userType;
+
+    @Enumerated(EnumType.STRING)
+    private UserType userType;
+
 
     @ManyToMany(fetch = FetchType.EAGER, mappedBy = "users", cascade = {CascadeType.DETACH})
     private List<Course> courses;
@@ -36,13 +39,13 @@ public class User {
 
     }
 
-    public User(String email, String password, String userType) {
+    public User(String email, String password, UserType userType) {
         this.email = email;
         this.password = password;
         this.userType = userType;
     }
 
-    public User(int id,String email, String password, String userType) {
+    public User(int id,String email, String password, UserType userType) {
         this.id = id;
         this.email = email;
         this.password = password;
@@ -73,11 +76,11 @@ public class User {
         this.password = password;
     }
 
-    public String getUserType() {
+    public UserType getUserType() {
         return userType;
     }
 
-    public void setUserType(String userType) {
+    public void setUserType(UserType userType) {
         this.userType = userType;
     }
 

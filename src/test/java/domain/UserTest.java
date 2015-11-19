@@ -25,7 +25,7 @@ public class UserTest {
 
     @Test
     public void testInvalidNullInput() throws Exception {
-        User user = new User(null, null, "Student");
+        User user = new User(null, null, UserType.TEACHER);
         Set<ConstraintViolation<User>> violations = validator.validate(user);
         violations.forEach(v -> System.out.println(v));
         assertEquals(2, violations.size());
@@ -33,7 +33,7 @@ public class UserTest {
 
     @Test
     public void testInvalidValue()throws Exception{
-        User user = new User("test", "test", "Student");
+        User user = new User("test", "test", UserType.STUDENT);
         Set<ConstraintViolation<User>> violations = validator.validate(user);
         violations.forEach(v -> System.out.println(v));
         assertEquals(2, violations.size());
@@ -41,7 +41,7 @@ public class UserTest {
 
     @Test
     public void testValidInput() throws Exception {
-        User validUser = new User("tester@test.no", "Test123HP", "Student");
+        User validUser = new User("tester@test.no", "Test123HP", UserType.STUDENT);
         Set<ConstraintViolation<User>> violations = validator.validate(validUser);
         assertEquals(0, violations.size());
     }

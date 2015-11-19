@@ -68,7 +68,6 @@ public class CourseController {
 
         course.getUsers().add(user);
         courseDAO.update(course);
-
     }
 
     public void removeCourseFromUser(Course course, User user){

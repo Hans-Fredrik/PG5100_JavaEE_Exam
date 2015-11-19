@@ -51,8 +51,8 @@
                         </div>
                         <div class="col-md-2">
                             <h:selectOneMenu class="form-control" value="#{userController.user.userType}">
-                                <f:selectItem itemValue="Student" itemLabel="Student" />
-                                <f:selectItem itemValue="Teacher" itemLabel="Teacher" />
+                                <f:selectItem itemValue="STUDENT" itemLabel="Student" />
+                                <f:selectItem itemValue="TEACHER" itemLabel="Teacher" />
                             </h:selectOneMenu>
                         </div>
                     </div>
@@ -65,7 +65,7 @@
 
 
         <div class="container">
-            <h4>Table over users: </h4>
+            <h4>Users: </h4>
             <h:dataTable id="table" value="#{userController.getAll()}" var="user"
                          styleClass="table table-bordered table-hover">
                 <h:column>

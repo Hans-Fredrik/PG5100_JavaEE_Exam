@@ -2,6 +2,7 @@ package repository;
 
 import domain.Course;
 import domain.User;
+import domain.UserType;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -62,7 +63,7 @@ public class UserDAOTest {
     @Test
     public void testCreateUser() throws Exception {
         entityManager.getTransaction().begin();
-        User created = userDAO.persist(new User("Test@Test.no", "Test12345", "Student"));
+        User created = userDAO.persist(new User("Test@Test.no", "Test12345", UserType.STUDENT));
         entityManager.getTransaction().commit();
         assertNotNull(created);
         assertTrue(created.getId() > 0);
