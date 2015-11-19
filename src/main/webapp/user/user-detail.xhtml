@@ -15,9 +15,9 @@
             <f:viewAction action="#{userController.initUser()}"/>
         </f:metadata>
 
+        <h1>#{userController.selectedId}</h1>
 
         <div class="container">
-            <h3>Update user</h3><br/>
 
             <h:form>
 
@@ -27,7 +27,7 @@
                             <h:outputLabel value="Id: "/>
                         </div>
                         <div class="col-md-2">
-                            #{userController.user.id}
+                            <h:outputLabel  id="id" value="#{userController.user.id}"/>
                         </div>
                     </div>
                 </div>
@@ -41,7 +41,7 @@
                             <h:inputText validatorMessage="Invalid email" id="email" value="#{userController.user.email}" />
                         </div>
                         <div class="col-md-3">
-                            <h:message for="email"/>
+                            <h:message id="emailMsg" for="email"/>
                         </div>
                     </div>
                 </div>
@@ -65,7 +65,7 @@
                             <h:outputLabel value="Type: "/>
                         </div>
                         <div class="col-md-2">
-                            <h:selectOneMenu class="form-control" value="#{userController.user.userType}">
+                            <h:selectOneMenu id="userType" class="form-control" value="#{userController.user.userType}">
                                 <f:selectItem itemValue="STUDENT" itemLabel="Student" />
                                 <f:selectItem itemValue="TEACHER" itemLabel="Teacher" />
                             </h:selectOneMenu>
@@ -73,8 +73,9 @@
                     </div>
                 </div>
 
-                <h:commandButton class="btn btn-default" action="#{userController.update()}" value="Update user"/>
+                <h:commandButton class="btn btn-default" action="#{userController.update()}" value="Update user" outcome="#{navigationController.processHomePage()}" />
             </h:form>
+
 
         </div>
 

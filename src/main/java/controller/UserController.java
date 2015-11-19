@@ -40,8 +40,13 @@ public class UserController {
         userDAO.remove(user);
     }
 
-    public void update(){
-        userDAO.update(userDAO.findById(user.getId()));
+    public String update(){
+        User userToUpdate = userDAO.findById(selectedId);
+        userToUpdate.setEmail(user.getEmail());
+        userToUpdate.setPassword(user.getPassword());
+        userToUpdate.setUserType(user.getUserType());
+        userDAO.update(userToUpdate);
+        return  "users";
     }
 
     public List<User> getAll(){
@@ -49,7 +54,7 @@ public class UserController {
     }
 
     public void initUser(){
-        this.user =  userDAO.findById(selectedId);
+        this.user = userDAO.findById(selectedId);
     }
 
     public int getSelectedId() {
