@@ -21,12 +21,12 @@ public class Course {
     @Size(min = 1)
     private String name;
 
-    @ManyToOne(cascade = {CascadeType.PERSIST})
+    @ManyToOne
     @JoinColumn(name = "FK_Location")
     private Location location;
 
     // @valid for å validere under objekt..
-    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST, CascadeType.MERGE})
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST})
     @JoinTable(name = "USR_SUB")
     @Size(min = 0, max = 100)
     private List<User> users;
