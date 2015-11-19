@@ -102,6 +102,12 @@
                             <div class="col-md-1">
                                 <h:commandLink class='glyphicon glyphicon-remove' action="#{userController.delete(user)}"/>
                             </div>
+                            <div class="col-md-1">
+                                <h:link outcome="#{navigationController.processUserDetailPage()}" class='glyphicon glyphicon-cog'>
+                                    <f:param name="id" value="#{user.id}" />
+                                </h:link>
+                            </div>
+
                         </div>
 
                         <ui:repeat value="#{courseController.getAllCoursesNotRegisteredIn(user)}" var="course1">
@@ -116,7 +122,7 @@
             </h:dataTable>
 
             <h:form>
-                <h:commandButton class="btn btn-default" action="#{navigationController.proccessHomePage}" value="Back"/>
+                <h:commandButton class="btn btn-default" action="#{navigationController.processHomePage}" value="Back"/>
             </h:form>
         </div>
     </ui:define>

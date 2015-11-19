@@ -1,19 +1,11 @@
 package controller;
 
-import domain.Course;
 import domain.User;
-import repository.CourseDAO;
-import repository.RemoteQualifier;
 import repository.UserDAO;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
-import javax.faces.bean.SessionScoped;
-import javax.faces.bean.ViewScoped;
 import javax.inject.Inject;
-import javax.inject.Named;
-import javax.persistence.PreRemove;
-import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -24,6 +16,7 @@ public class UserController {
 
     private final UserDAO userDAO;
     private User user;
+    private int selectedId;
 
     @Inject
     public UserController(UserDAO userDAO) {
@@ -47,12 +40,23 @@ public class UserController {
         userDAO.remove(user);
     }
 
-    public void update(User user){
-        userDAO.update(user);
+    public void update(){
+        userDAO.update(userDAO.findById(user.getId()));
     }
 
     public List<User> getAll(){
         return userDAO.getAll();
     }
 
+    public void initUser(){
+        this.user =  userDAO.findById(selectedId);
+    }
+
+    public int getSelectedId() {
+        return selectedId;
+    }
+
+    public void setSelectedId(int selectedId) {
+        this.selectedId = selectedId;
+    }
 }

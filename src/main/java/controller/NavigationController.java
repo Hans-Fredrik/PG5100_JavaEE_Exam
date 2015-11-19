@@ -8,17 +8,21 @@ import javax.enterprise.inject.Model;
 @Model
 public class NavigationController {
 
-    public String proccessUsersPage(){
+    public String processUsersPage(){
         return "users";
     }
-    public String proccessHomePage(){
+    public String processHomePage(){
         return "index";
     }
-    public String proccessCoursePage(){
+    public String processCoursePage(){
         return "courses";
     }
-    public String proccessLocationPage(){
+    public String processLocationPage(){
         return "location";
     }
+    public String processUserDetailPage(){
+        return "user-details";
+    }
+
 
 }
