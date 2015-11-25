@@ -38,10 +38,12 @@
                             <h:outputLabel value="Email: "/>
                         </div>
                         <div class="col-md-2">
-                            <h:inputText validatorMessage="Invalid email" id="email" value="#{userController.user.email}" />
+                            <h:inputText validatorMessage="Invalid email" id="email" value="#{userController.user.email}">
+                                <p:ajax update="msgEmail" event="keyup" />
+                            </h:inputText>
                         </div>
                         <div class="col-md-3">
-                            <h:message for="email"/>
+                            <h:message for="email" id="msgEmail"/>
                         </div>
                     </div>
                 </div>
@@ -52,10 +54,12 @@
                             <h:outputLabel value="Password: "/>
                         </div>
                         <div class="col-md-2">
-                            <h:inputText validatorMessage="4-16 numbers and characters" id="password" value="#{userController.user.password}" />
+                            <h:inputText validatorMessage="4-16 numbers and characters" id="password" value="#{userController.user.password}">
+                                <p:ajax update="msgPassword" event="keyup" />
+                            </h:inputText>
                         </div>
                         <div class="col-md-3">
-                            <h:message for="password"/>
+                            <h:message for="password" id="msgPassword"/>
                         </div>
                     </div>
                 </div>

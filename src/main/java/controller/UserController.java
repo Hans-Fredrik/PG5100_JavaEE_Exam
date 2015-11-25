@@ -41,7 +41,6 @@ public class UserController {
     }
 
     public String update(int id){
-        System.out.println("\n From update -> ID: " + id);
         User userToUpdate = userDAO.findById(id);
         userToUpdate.setEmail(user.getEmail());
         userToUpdate.setPassword(user.getPassword());

@@ -23,19 +23,32 @@ public class UserTest {
         validator = validatorFactory.getValidator();
     }
 
+
     @Test
     public void testInvalidNullInput() throws Exception {
         User user = new User(null, null, UserType.TEACHER);
         Set<ConstraintViolation<User>> violations = validator.validate(user);
-        violations.forEach(v -> System.out.println(v));
         assertEquals(2, violations.size());
     }
 
     @Test
-    public void testInvalidValue()throws Exception{
+    public void testInvalidEmail() throws Exception {
+        User user = new User("test@test", "goodPws23", UserType.STUDENT);
+        Set<ConstraintViolation<User>> violations = validator.validate(user);
+        assertEquals(1, violations.size());
+    }
+
+    @Test
+    public void testInvalidPassword() throws Exception {
+        User user = new User("test@test.no", "badpw", UserType.STUDENT);
+        Set<ConstraintViolation<User>> violations = validator.validate(user);
+        assertEquals(1, violations.size());
+    }
+
+    @Test
+    public void testInvalidValues()throws Exception{
         User user = new User("test", "test", UserType.STUDENT);
         Set<ConstraintViolation<User>> violations = validator.validate(user);
-        violations.forEach(v -> System.out.println(v));
         assertEquals(2, violations.size());
     }
 
@@ -45,4 +58,5 @@ public class UserTest {
         Set<ConstraintViolation<User>> violations = validator.validate(validUser);
         assertEquals(0, violations.size());
     }
+
 }
