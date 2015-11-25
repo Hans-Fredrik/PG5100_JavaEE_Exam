@@ -15,7 +15,6 @@
             <h3>New user</h3><br/>
 
             <h:form>
-
                 <div class="form-group">
                     <div class="row">
                         <div class="col-md-1">
@@ -70,7 +69,7 @@
                          styleClass="table table-bordered table-hover">
                 <h:column>
                     <f:facet name="header">User ID:</f:facet>
-                    #{user.id}
+                    <h:outputLabel value="#{user.id}" />
                 </h:column>
 
                 <h:column>

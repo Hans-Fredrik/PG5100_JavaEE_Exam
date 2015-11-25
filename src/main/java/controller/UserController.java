@@ -40,14 +40,15 @@ public class UserController {
         userDAO.remove(user);
     }
 
-    public String update(){
-        User userToUpdate = userDAO.findById(selectedId);
+    public String update(int id){
+        User userToUpdate = userDAO.findById(id);
         userToUpdate.setEmail(user.getEmail());
         userToUpdate.setPassword(user.getPassword());
         userToUpdate.setUserType(user.getUserType());
         userDAO.update(userToUpdate);
         return  "users";
     }
+
 
     public List<User> getAll(){
         return userDAO.getAll();

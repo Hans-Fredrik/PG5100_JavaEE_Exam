@@ -4,7 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
 <ui:composition template="../PageTemplate.xhtml">
     <ui:define name="title">User detail</ui:define>
@@ -15,7 +16,8 @@
             <f:viewAction action="#{userController.initUser()}"/>
         </f:metadata>
 
-        <h1>#{userController.selectedId}</h1>
+
+        <br/><br/>
 
         <div class="container">
 
@@ -38,13 +40,66 @@
                             <h:outputLabel value="Email: "/>
                         </div>
                         <div class="col-md-2">
-                            <h:inputText validatorMessage="Invalid email" id="email" value="#{userController.user.email}" />
-                        </div>
-                        <div class="col-md-3">
-                            <h:message id="emailMsg" for="email"/>
+                            <h:outputLabel  value="#{userController.user.email}"/>
                         </div>
                     </div>
                 </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-1">
+                            <h:outputLabel value="Password: "/>
+                        </div>
+                        <div class="col-md-2">
+                            <h:outputLabel  value="#{userController.user.password}"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-1">
+                            <h:outputLabel value="Type: "/>
+                        </div>
+                        <div class="col-md-2">
+                            <h:outputLabel  value="#{userController.user.userType}"/>
+                        </div>
+                    </div>
+                </div>
+
+            </h:form>
+
+
+        </div>
+
+
+        <div class="container">
+            <h3>Update user</h3><br/>
+
+            <h:form>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-2">
+                            <h:inputHidden binding="#{inputID}" value="#{userController.user.id}"/>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-1">
+                            <h:outputLabel value="Email: "/>
+                        </div>
+                        <div class="col-md-2">
+                            <h:inputText validatorMessage="Invalid email" id="email" value="#{userController.user.email}" />
+                        </div>
+                        <div class="col-md-3">
+                            <h:message for="email"/>
+                        </div>
+                    </div>
+                </div>
+
                 <div class="form-group">
                     <div class="row">
                         <div class="col-md-1">
@@ -65,7 +120,7 @@
                             <h:outputLabel value="Type: "/>
                         </div>
                         <div class="col-md-2">
-                            <h:selectOneMenu id="userType" class="form-control" value="#{userController.user.userType}">
+                            <h:selectOneMenu class="form-control" value="#{userController.user.userType}">
                                 <f:selectItem itemValue="STUDENT" itemLabel="Student" />
                                 <f:selectItem itemValue="TEACHER" itemLabel="Teacher" />
                             </h:selectOneMenu>
@@ -73,12 +128,40 @@
                     </div>
                 </div>
 
-                <h:commandButton class="btn btn-default" action="#{userController.update()}" value="Update user" outcome="#{navigationController.processHomePage()}" />
+                <h:commandButton class="btn btn-default" action="#{userController.update(inputID.value)}" value="Update user"/>
             </h:form>
-
-
         </div>
 
+
+
+        <div class="container">
+
+            <h:form>
+                <p:panel id="panel" header="Update User">
+
+                    <p:messages id="msgs" />
+
+                    <h:panelGrid columns="3" cellpadding="5">
+                        <p:outputLabel for="email2" value="Email:" />
+                        <p:inputText id="email2" value="#{userController.user.email}" required="true" label="Email">
+                            <f:validateLength minimum="2" />
+                        </p:inputText>
+                        <p:message for="email2" display="icon" />
+
+                        <p:outputLabel for="password2" value="Password:" />
+                        <p:inputText id="password2" value="#{userController.user.password}" label="Password" required="true">
+                            <f:validateLength minimum="2" />
+                            <p:ajax update="msgLastname" event="keyup" />
+                        </p:inputText>
+                        <p:message for="password2" id="msgLastname" display="icon" />
+
+                    </h:panelGrid>
+
+                    <p:commandButton class="btn btn-default" value="Save" update="panel" actionListener="#{userController.update(userController.selectedId)}" />
+                </p:panel>
+            </h:form>
+
+        </div>
 
     </ui:define>
 </ui:composition>
