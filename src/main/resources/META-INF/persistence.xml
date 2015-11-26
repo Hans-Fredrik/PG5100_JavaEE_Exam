@@ -10,9 +10,9 @@
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
-            <property name="javax.persistence.jdbc.url" value="jdbc:h2:tcp://localhost:9092/~/forelesning1" />
+            <property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:pg5100_Egentrening"/>
             <property name="javax.persistence.jdbc.user" value="hffb" />
-            <property name="javax.persistence.jdbc.password" value="Wvcmaq1993" />
+            <property name="javax.persistence.jdbc.password" value="" />
             <property name="dialect" value="org.hibernate.dialect.H2Dialect"/>
             <property name="hibernate.hbm2ddl.auto" value="create"/>
             <!--<property name="hibernate.show_sql" value="true"/>-->

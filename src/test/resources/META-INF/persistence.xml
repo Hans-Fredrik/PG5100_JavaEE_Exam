@@ -13,7 +13,7 @@
         <class>domain.Course</class>
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
-            <property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:jpa-named-queries;"/>
+            <property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:pg5100_Egentrening;"/>
             <property name="dialect" value="org.hibernate.dialect.H2Dialect"/>
             <property name="hibernate.hbm2ddl.auto" value="create"/>
             <property name="hibernate.hbm2ddl.import_files" value="insert.sql"/>
