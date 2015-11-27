@@ -81,21 +81,31 @@ public class CourseControllerTest {
 
     @Test
     public void testAddCourseToUser() throws Exception {
-
+        courseController.addCourseToUser(new Course(), new User());
+        verify(courseDAO, times(1)).update(anyObject());
     }
+
 
     @Test
     public void testRemoveCourseFromUser() throws Exception {
-
+        Course course = new Course("test", new ArrayList<>(), new Location());
+        courseController.removeCourseFromUser(course, new User());
+        verify(courseDAO, times(1)).update(anyObject());
     }
+
 
     @Test
     public void testAddLocation() throws Exception {
-
+        courseController.addLocation(new Course(), new Location());
+        verify(courseDAO, times(1)).update(anyObject());
     }
+
 
     @Test
     public void testRemoveLocation() throws Exception {
-
+        Course course = new Course();
+        course.setLocation(new Location());
+        courseController.removeLocation(course);
+        verify(courseDAO, times(1)).update(anyObject());
     }
 }
