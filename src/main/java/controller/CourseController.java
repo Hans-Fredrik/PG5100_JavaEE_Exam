@@ -52,7 +52,7 @@ public class CourseController {
     public List<Course> getAllCoursesNotRegisteredIn(User user){
         List<Course> filteredList = new ArrayList<>();
 
-        getAll().forEach(course ->{
+        courseDAO.getAll().forEach(course ->{
             if(!course.getUsers().contains(user)){
                 filteredList.add(course);
             }

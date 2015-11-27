@@ -50,6 +50,7 @@ public class UserServiceTest {
         assertNotNull(userService.deleteUserByID(1));
 
         verify(userService.userDAO, atLeastOnce()).remove(any());
+
     }
 
     @Test
