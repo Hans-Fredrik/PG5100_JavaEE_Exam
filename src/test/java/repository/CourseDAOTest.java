@@ -61,8 +61,6 @@ public class CourseDAOTest {
         Course course = courseDAO.persist(new Course("PG5100", new ArrayList<User>(), null));
         courseDAO.getEntityManager().getTransaction().commit();
 
-
-
         Course course1 = courseDAO.findById(course.getId());
         courseDAO.getEntityManager().getTransaction().begin();
         course1.getUsers().add(new User("hans@hans.no", "hansH923", UserType.TEACHER));

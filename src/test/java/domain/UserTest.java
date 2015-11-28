@@ -23,7 +23,6 @@ public class UserTest {
         validator = validatorFactory.getValidator();
     }
 
-
     @Test
     public void testInvalidNullInput() throws Exception {
         User user = new User(null, null, UserType.TEACHER);
@@ -59,4 +58,17 @@ public class UserTest {
         assertEquals(0, violations.size());
     }
 
+    @Test
+    public void testEqualsMethod() throws Exception {
+        User user1 = new User();
+        user1.setId(1);
+        assertFalse(user1.equals(new Object()));
+
+        User user2 = new User();
+        user2.setId(2);
+        assertFalse(user2.equals(user1));
+
+        user2.setId(1);
+        assertTrue(user1.equals(user2));
+    }
 }
