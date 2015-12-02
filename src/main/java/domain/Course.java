@@ -1,6 +1,7 @@
 package domain;
 
 import javax.persistence.*;
+import javax.validation.Valid;
 import javax.validation.constraints.Min;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -25,10 +26,10 @@ public class Course {
     @JoinColumn(name = "FK_Location")
     private Location location;
 
-    // @valid for å validere under objekt..
     @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.PERSIST})
     @JoinTable(name = "USR_SUB")
     @Size(min = 0, max = 100)
+    @Valid
     private List<User> users;
 
 
@@ -82,5 +83,17 @@ public class Course {
                 ", location=" + location +
                 ", users=" + users +
                 '}';
+    }
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (!(o instanceof Course)) return false;
+
+        Course course = (Course) o;
+
+        if (id != course.id) return false;
+
+        return true;
     }
 }

@@ -1,10 +1,10 @@
 INSERT INTO USER VALUES (null, 'test@t.no', 'Tester123', 'STUDENT');
-INSERT INTO USER VALUES(null, 'kim@g.no', 'heikim', 'TEACHER');
-INSERT INTO USER VALUES(null, 'Per@NITH.no', 'heiPer', 'STUDENT');
-INSERT INTO USER VALUES(null, 'Ola@NITH.no', 'heiOla', 'STUDENT');
-INSERT INTO USER VALUES(null, 'Lise@NITH.no', 'heiLise', 'STUDENT');
+INSERT INTO USER VALUES(null, 'kim@g.no', 'heikim2', 'TEACHER');
+INSERT INTO USER VALUES(null, 'Per@NITH.no', 'heiPer1', 'STUDENT');
+INSERT INTO USER VALUES(null, 'Ola@NITH.no', 'heiOla2', 'STUDENT');
+INSERT INTO USER VALUES(null, 'Lise@NITH.no', 'heiLise1', 'STUDENT');
 INSERT INTO USER VALUES (null, 'testerdelete@t.no', 'Tester123', 'STUDENT');
-INSERT INTO USER VALUES (null, 'Idar@vassdal.no', 'IdarSittPassord', 'STUDENT');
+INSERT INTO USER VALUES (null, 'Idar@vassdal.no', '2IdarPassord', 'STUDENT');
 
 
 INSERT INTO COURSE (NAME) VALUES('PG5100 - Enterprise programmering 1');

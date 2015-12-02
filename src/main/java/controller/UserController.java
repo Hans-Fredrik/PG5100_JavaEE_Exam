@@ -34,6 +34,7 @@ public class UserController {
 
     public void persist(){
         userDAO.persist(user);
+        user.setEmail("");
     }
 
     public void delete(User user){
@@ -48,6 +49,8 @@ public class UserController {
         userToUpdate.setPassword(user.getPassword());
         userToUpdate.setUserType(user.getUserType());
         userDAO.update(userToUpdate);
+
+        user.setEmail("");
         return  "users";
     }
 
