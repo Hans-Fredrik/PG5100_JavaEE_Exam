@@ -21,6 +21,7 @@ public class UserControllerTest {
     public void setUp() throws Exception {
         userDAO = mock(UserDAO.class);
         userController = new UserController(userDAO);
+        userController.init();
     }
 
     @Test
