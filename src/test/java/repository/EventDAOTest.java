@@ -12,6 +12,7 @@ import javax.persistence.Persistence;
 
 import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import static org.junit.Assert.*;
 
@@ -54,11 +55,61 @@ public class EventDAOTest {
         course.setId(1);
 
         Event event = new Event(EventType.ASSIGNMENT, "Oppgave1", "Intro1", course, new Date(), new Date());
-
         entityManager.getTransaction().begin();
         eventDAO.persist(event);
         entityManager.getTransaction().commit();
 
         assertTrue(event.getId() > 0);
+    }
+
+    @Test
+    public void testGetAllEvents() throws Exception {
+        List<Event> eventList = eventDAO.getAll();
+        assertNotNull(eventList);
+        assertTrue(eventList.size() > 1);
+    }
+
+    @Test
+    public void testUpdateEventAllFields() throws Exception {
+        Event event = eventDAO.findById(1);
+
+        Event oldValues = new Event();
+        oldValues.setTitle(event.getTitle());
+        oldValues.setDescription(event.getDescription());
+        oldValues.setEventType(event.getEventType());
+        oldValues.setStartingTime(event.getStartingTime());
+        oldValues.setEndingTime(event.getEndingTime());
+        oldValues.setCourse(event.getCourse());
+
+        event.setTitle("New Title");
+        event.setDescription("New Desc");
+        event.setEventType(EventType.ASSIGNMENT);
+        event.setStartingTime(new Date());
+        event.setEndingTime(new Date());
+        Course course = new Course();
+        course.setId(2);
+        event.setCourse(course);
+
+        eventDAO.update(event);
+
+        Event newValues = eventDAO.findById(1);
+        assertNotEquals(newValues.getTitle(), oldValues.getTitle());
+        assertNotEquals(newValues.getDescription(), oldValues.getDescription());
+        assertNotEquals(newValues.getEventType(), oldValues.getEventType());
+        assertNotEquals(newValues.getStartingTime(), oldValues.getStartingTime());
+        assertNotEquals(newValues.getEndingTime(), oldValues.getEndingTime());
+        assertNotEquals(newValues.getCourse(), oldValues.getCourse());
+    }
+
+    @Test
+    public void testDeleteEvent() throws Exception {
+        Event event = eventDAO.findById(1);
+        assertNotNull(event);
+
+        entityManager.getTransaction().begin();
+        eventDAO.remove(event);
+        entityManager.getTransaction().commit();
+
+        assertNull(eventDAO.findById(1));
     }
 }

@@ -31,6 +31,16 @@
             <to-view-id>/user/user-detail.xhtml</to-view-id>
         </navigation-case>
 
+        <navigation-case>
+            <from-outcome>events</from-outcome>
+            <to-view-id>/event/events.xhtml</to-view-id>
+        </navigation-case>
+
+        <navigation-case>
+            <from-outcome>event-details</from-outcome>
+            <to-view-id>/event/event-detail.xhtml</to-view-id>
+        </navigation-case>
+
     </navigation-rule>
 
 </faces-config>

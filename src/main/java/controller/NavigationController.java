@@ -23,6 +23,12 @@ public class NavigationController {
     public String processUserDetailPage(){
         return "user-details";
     }
+    public String processEventPage(){
+        return "events";
+    }
+    public String processEventDetailPage(){
+        return "event-details";
+    }
 
 
 }

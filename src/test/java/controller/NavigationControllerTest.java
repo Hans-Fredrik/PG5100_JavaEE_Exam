@@ -38,4 +38,14 @@ public class NavigationControllerTest {
     public void testProcessUserDetailPage() throws Exception {
         assertEquals("user-details", navigationController.processUserDetailPage());
     }
+
+    @Test
+    public void testProcessEvent() throws Exception {
+        assertEquals("events", navigationController.processEventPage());
+    }
+
+    @Test
+    public void testProcessEventDetails() throws Exception {
+        assertEquals("event-details", navigationController.processEventDetailPage());
+    }
 }

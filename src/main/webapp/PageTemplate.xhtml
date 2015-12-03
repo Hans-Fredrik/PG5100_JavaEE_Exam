@@ -20,10 +20,11 @@
             <div class="container">
                 <div class="collapse navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li><h:commandLink value="Home" action="#{navigationController.processHomePage}"/></li>
-                        <li><h:commandLink value="Users" action="#{navigationController.processUsersPage}"/></li>
-                        <li><h:commandLink value="Courses" action="#{navigationController.processCoursePage}"/></li>
-                        <li><h:commandLink value="Location" action="#{navigationController.processLocationPage}"/></li>
+                        <li><h:commandLink value="Home" action="#{navigationController.processHomePage()}"/></li>
+                        <li><h:commandLink value="Users" action="#{navigationController.processUsersPage()}"/></li>
+                        <li><h:commandLink value="Courses" action="#{navigationController.processCoursePage()}"/></li>
+                        <li><h:commandLink value="Location" action="#{navigationController.processLocationPage()}"/></li>
+                        <li><h:commandLink value="Events" action="#{navigationController.processEventPage()}"/></li>
                     </ul>
                 </div>
             </div>
