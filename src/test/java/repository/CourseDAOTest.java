@@ -6,6 +6,7 @@ import domain.UserType;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import org.junit.experimental.categories.Category;
 
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
@@ -16,6 +17,7 @@ import java.util.List;
 
 import static org.junit.Assert.*;
 
+@Category(IntegrationTest.class)
 public class CourseDAOTest {
 
 

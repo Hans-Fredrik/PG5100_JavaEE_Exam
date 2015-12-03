@@ -18,6 +18,7 @@ public class Event {
     private int id;
 
     @NotNull
+    @Enumerated(EnumType.STRING)
     private EventType eventType;
 
     @NotNull

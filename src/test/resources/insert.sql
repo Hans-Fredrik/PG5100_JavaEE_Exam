@@ -1,16 +1,21 @@
-INSERT INTO USER VALUES (null, 'test@t.no', 'Tester123', 'STUDENT');
-INSERT INTO USER VALUES(null, 'kim@g.no', 'heikim', 'TEACHER');
-INSERT INTO USER VALUES(null, 'Per@NITH.no', 'heiPer', 'STUDENT');
-INSERT INTO USER VALUES(null, 'Ola@NITH.no', 'heiOla', 'STUDENT');
-INSERT INTO USER VALUES(null, 'Lise@NITH.no', 'heiLise', 'STUDENT');
-INSERT INTO USER VALUES (null, 'testerdelete@t.no', 'Tester123', 'STUDENT');
-INSERT INTO USER VALUES (null, 'Idar@vassdal.no', 'IdarSittPassord', 'STUDENT');
+INSERT INTO USER VALUES (1, 'test@t.no', 'Tester123', 'STUDENT');
+INSERT INTO USER VALUES(2, 'kim@g.no', 'heikim1', 'TEACHER');
+INSERT INTO USER VALUES(3, 'Per@NITH.no', 'heiPer1', 'STUDENT');
+INSERT INTO USER VALUES(4, 'Ola@NITH.no', 'heiOla1', 'STUDENT');
+INSERT INTO USER VALUES(5, 'Lise@NITH.no', 'heiLise1', 'STUDENT');
+INSERT INTO USER VALUES (6, 'testerdelete@t.no', 'Tester123', 'STUDENT');
+INSERT INTO USER VALUES (7, 'Idar@vassdal.no', 'Idar2SittPassord', 'STUDENT');
 
-INSERT INTO COURSE (NAME) VALUES('PG5100 - Enterprise programmering 1');
-INSERT INTO COURSE (NAME) VALUES('BU5100 - Entepenorskap');
-INSERT INTO COURSE (NAME) VALUES('PG5600 - IOS programmering');
+INSERT INTO COURSE (ID, NAME) VALUES(1, 'PG5100 - Enterprise programmering 1');
+INSERT INTO COURSE (ID, NAME) VALUES(2, 'BU5100 - Entepenorskap');
+INSERT INTO COURSE (ID, NAME) VALUES(3, 'PG5600 - IOS programmering');
 
 
-INSERT INTO LOCATION VALUES(NULL, 'Galleriet', '82');
-INSERT INTO LOCATION VALUES(NULL, 'Galleriet', '35');
+INSERT INTO LOCATION VALUES(1, 'Galleriet', '82');
+INSERT INTO LOCATION VALUES(2, 'Galleriet', '35');
 
+INSERT INTO EVENT VALUES(1,'PG5100', 'LECTURE', 'EJB - Forelesning',1);
+INSERT INTO EVENT VALUES(2,'Business', 'LECTURE', 'Models - Forelesning',2);
+
+INSERT INTO EVENT_DETAILS VALUES('2015-12-03 09:00:00', '2015-12-03 12:00:00', 1);
+INSERT INTO EVENT_DETAILS VALUES('2015-12-03 08:15:00', '2015-12-03 12:15:00', 2);

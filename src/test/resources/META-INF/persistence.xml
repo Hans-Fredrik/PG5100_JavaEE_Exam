@@ -11,6 +11,7 @@
         <class>domain.User</class>
         <class>domain.Location</class>
         <class>domain.Course</class>
+        <class>domain.Event</class>
         <properties>
             <property name="javax.persistence.jdbc.driver" value="org.h2.Driver"/>
             <property name="javax.persistence.jdbc.url" value="jdbc:h2:mem:pg5100_Egentrening;"/>
