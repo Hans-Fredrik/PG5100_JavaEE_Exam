@@ -104,6 +104,7 @@ public class EventDAOTest {
     @Test
     public void testDeleteEvent() throws Exception {
         Event event = eventDAO.findById(1);
+        System.out.println(event.toString());
         assertNotNull(event);
 
         entityManager.getTransaction().begin();

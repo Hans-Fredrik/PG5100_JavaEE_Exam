@@ -43,8 +43,8 @@ public class UserController {
 
     public String update(int id){
         User userToUpdate = userDAO.findById(id);
-        if(userToUpdate == null) return "users";
 
+        if(userToUpdate == null) return "users";
         userToUpdate.setEmail(user.getEmail());
         userToUpdate.setPassword(user.getPassword());
         userToUpdate.setUserType(user.getUserType());
