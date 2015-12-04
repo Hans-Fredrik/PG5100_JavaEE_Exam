@@ -76,6 +76,7 @@ public class LocationDAOTest {
         assertNull(locationDAO.findById(1));
     }
 
+
     @Before
     public void begin() {
         locationDAO.getEntityManager().getTransaction().begin();

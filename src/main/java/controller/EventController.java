@@ -43,8 +43,6 @@ public class EventController {
     @PostConstruct
     public void init(){
         event = new Event();
-        event.setStartingTime(new Date());
-        event.setEndingTime(new Date());
     }
 
     public void initEvent(){

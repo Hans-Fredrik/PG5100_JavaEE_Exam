@@ -5,7 +5,8 @@
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
       xmlns:f="http://xmlns.jcp.org/jsf/core"
-      xmlns:c="http://java.sun.com/jsp/jstl/core">
+      xmlns:c="http://java.sun.com/jsp/jstl/core"
+      xmlns:p="http://primefaces.org/ui">
 
 
 <ui:composition template="../PageTemplate.xhtml">
@@ -22,9 +23,10 @@
                         </div>
                         <div class="col-md-2">
                             <h:inputText validatorMessage="Invalid email" id="email" value="#{userController.user.email}" />
+                            <p:ajax update="msgEmail" event="keyup" />
                         </div>
                         <div class="col-md-3">
-                            <h:message for="email"/>
+                            <h:message id="msgEmail" for="email"/>
                         </div>
                     </div>
                 </div>
@@ -35,10 +37,11 @@
                             <h:outputLabel value="Password: "/>
                         </div>
                         <div class="col-md-2">
-                            <h:inputSecret validatorMessage="4-16 numbers and characters" id="password" value="#{userController.user.password}" />
+                            <h:inputText validatorMessage="4-16 numbers and characters" id="password" value="#{userController.user.password}"/>
+                            <p:ajax update="msgPassword" event="keyup" />
                         </div>
                         <div class="col-md-3">
-                            <h:message for="password"/>
+                            <h:message id="msgPassword" for="password"/>
                         </div>
                     </div>
                 </div>
