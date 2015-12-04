@@ -4,7 +4,8 @@
 <html xmlns="http://www.w3.org/1999/xhtml"
       xmlns:h="http://xmlns.jcp.org/jsf/html"
       xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
-      xmlns:f="http://xmlns.jcp.org/jsf/core">
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
 
 <ui:composition template="../PageTemplate.xhtml">
     <ui:define name="title">Location</ui:define>
@@ -20,9 +21,10 @@
                         </div>
                         <div class="col-md-2">
                             <h:inputText validatorMessage="Can't be empty" id="room" value="#{locationController.location.room}" />
+                            <p:ajax update="msgRoom" event="keyup" />
                         </div>
                         <div class="col-md-3">
-                            <h:message for="room"/>
+                            <h:message style="color:red;" id="msgRoom" for="room"/>
                         </div>
                     </div>
 
@@ -32,9 +34,10 @@
                         </div>
                         <div class="col-md-2">
                             <h:inputText validatorMessage="Can't be empty" id="buildning" value="#{locationController.location.buildning}" />
+                            <p:ajax update="msgBuild" event="keyup" />
                         </div>
                         <div class="col-md-3">
-                            <h:message for="buildning"/>
+                            <h:message style="color:red;" id="msgBuild" for="buildning"/>
                         </div>
                     </div>
                 </div>
@@ -43,7 +46,7 @@
             </h:form>
 
         </div>
-        
+
 
         <div class="container">
             <h4>Locations: </h4>

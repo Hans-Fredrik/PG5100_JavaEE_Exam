@@ -21,9 +21,10 @@
                         </div>
                         <div class="col-md-2">
                             <h:inputText validatorMessage="Can't be empty" id="name" value="#{courseController.course.name}" />
+                            <p:ajax update="msgName" event="keyup" />
                         </div>
                         <div class="col-md-3">
-                            <h:message for="name"/>
+                            <h:message style="color:red;" id="msgName" for="name"/>
                         </div>
                     </div>
                 </div>
