@@ -1,23 +1,25 @@
 package controller;
 
 import domain.Course;
-import domain.Event;
-import org.primefaces.context.RequestContext;
-import org.primefaces.event.SelectEvent;
+import domain.Event;;
 import repository.CourseDAO;
 import repository.EventDAO;
 
+import javax.annotation.ManagedBean;
 import javax.annotation.PostConstruct;
+import javax.ejb.EJB;
 import javax.enterprise.inject.Model;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
 import javax.inject.Inject;
-import java.text.SimpleDateFormat;
-import java.util.ArrayList;
 import java.util.Comparator;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
+
+import java.text.SimpleDateFormat;
+import javax.faces.application.FacesMessage;
+import javax.faces.context.FacesContext;
+import org.primefaces.context.RequestContext;
+import org.primefaces.event.SelectEvent;
 
 /**
  * Created by hffb on 03/12/15.
@@ -29,6 +31,7 @@ public class EventController {
     private final CourseDAO courseDAO;
     private Event event;
     private int selectedCourseId;
+
 
     @Inject
     public EventController(EventDAO eventDAO, CourseDAO courseDAO){
@@ -43,7 +46,6 @@ public class EventController {
         event.setEndingTime(new Date());
     }
 
-
     public Event getEvent() {
         return event;
     }
@@ -54,6 +56,8 @@ public class EventController {
         eventDAO.persist(event);
         event.setTitle("");
         event.setDescription("");
+
+        System.out.println("dates: " + event.getStartingTime().toString());
     }
 
     public void delete(Event event){
@@ -70,11 +74,8 @@ public class EventController {
 
     public List<Event> getAllSortedByStartingTime(){
         List<Event> eventList = eventDAO.getAll();
+        eventList.forEach(d -> System.out.println(d.toString()));
         return eventList.stream().sorted(Comparator.comparing(Event::getStartingTime)).collect(Collectors.toList());
-    }
-
-    public void hello(){
-        System.out.println("Hello");
     }
 
 

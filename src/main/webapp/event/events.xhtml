@@ -15,7 +15,7 @@
         <div class="container">
             <h3>New Event</h3><br/>
 
-            <h:form>
+            <h:form id="form">
 
                 <div class="form-group">
                     <div class="row">
@@ -79,22 +79,21 @@
                     </div>
                 </div>
 
-
-
                 <div class="form-group">
                     <div class="row">
                         <div class="col-md-1">
-                            <h:outputLabel value="startingTime: "/>
+                            <h:outputLabel value="Start time: "/>
+                            <p:calendar id="datetime1" value="#{eventController.event.startingTime}" pattern="MM/dd/yyyy HH:mm:ss" />
                         </div>
                         <div class="col-md-2">
-                            <h:inputText id="start" pattern="yyyy-MM-dd hh:mm" validatorMessage="Must be format {yyyy-MM-dd hh:mm}" value="#{eventController.event.startingTime}">
-                                <f:convertDateTime pattern="yyyy-MM-dd hh:mm"/>
-                            </h:inputText>
-                            <p:ajax update="msgStart" event="keyup" />
+                            <p:dialog modal="true" resizable="false" header="Values" widgetVar="dlg" showEffect="fold">
+                                <h:outputText value="#{eventController.event.startingTime}">
+                                    <f:convertDateTime pattern="MM/dd/yyyy HH:mm" />
+                                </h:outputText>
+                            </p:dialog>
 
                         </div>
                         <div class="col-md-3">
-                            <h:message for="start" id="msgStart"/>
                         </div>
                     </div>
                 </div>
@@ -103,16 +102,18 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col-md-1">
-                            <h:outputLabel value="Ending time: "/>
+                            <h:outputLabel value="End time: "/>
+                            <p:calendar id="datetime" value="#{eventController.event.endingTime}" pattern="MM/dd/yyyy HH:mm:ss" />
                         </div>
                         <div class="col-md-2">
-                            <h:inputText id="end" validatorMessage="Must be format {yyyy-MM-dd hh:mm}" value="#{eventController.event.endingTime}">
-                                <f:convertDateTime pattern="yyyy-MM-dd hh:mm" />
-                            </h:inputText>
-                            <p:ajax update="msgEnd" event="keyup" />
+                            <p:dialog modal="true" resizable="false" header="Values" widgetVar="dlg" showEffect="fold">
+                                <h:outputText value="#{eventController.event.endingTime}">
+                                    <f:convertDateTime pattern="MM/dd/yyyy HH:mm" />
+                                </h:outputText>
+                            </p:dialog>
+
                         </div>
                         <div class="col-md-3">
-                            <h:message for="end" id="msgEnd"/>
                         </div>
                     </div>
                 </div>
@@ -143,7 +144,9 @@
 
                 <h:column>
                     <f:facet name="header">Start time:</f:facet>
-                    #{event.startingTime}
+                    <h:outputLabel value="#{event.startingTime}">
+                        <f:convertDateTime pattern="yyyy-MM-dd HH:mm" />
+                    </h:outputLabel>
                 </h:column>
 
                 <h:column>
@@ -159,7 +162,6 @@
             </h:dataTable>
 
         </div>
-
 
     </ui:define>
 
