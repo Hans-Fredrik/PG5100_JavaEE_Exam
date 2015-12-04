@@ -6,6 +6,7 @@ import domain.EventType;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
+import repository.CourseDAO;
 import repository.EventDAO;
 
 import java.text.ParseException;
@@ -20,12 +21,14 @@ import static org.mockito.Mockito.*;
 public class EventControllerTest {
 
     private EventDAO eventDAO;
+    private CourseDAO courseDAO;
     private EventController eventController;
 
     @Before
     public void setUp() throws Exception {
         eventDAO = mock(EventDAO.class);
-        eventController = new EventController(eventDAO);
+        courseDAO = mock(CourseDAO.class);
+        eventController = new EventController(eventDAO, courseDAO);
     }
 
     @Test
@@ -36,7 +39,10 @@ public class EventControllerTest {
 
     @Test
     public void testPersist() throws Exception {
+        eventController.setSelectedCourseId(1);
+        eventController.init();
         eventController.persist();
+        verify(courseDAO, times(1)).findById(1);
         verify(eventDAO, times(1)).persist(anyObject());
     }
 
