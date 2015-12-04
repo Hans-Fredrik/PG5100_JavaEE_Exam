@@ -56,8 +56,6 @@ public class EventController {
         eventDAO.persist(event);
         event.setTitle("");
         event.setDescription("");
-
-        System.out.println("dates: " + event.getStartingTime().toString());
     }
 
     public void delete(Event event){
@@ -74,7 +72,6 @@ public class EventController {
 
     public List<Event> getAllSortedByStartingTime(){
         List<Event> eventList = eventDAO.getAll();
-        eventList.forEach(d -> System.out.println(d.toString()));
         return eventList.stream().sorted(Comparator.comparing(Event::getStartingTime)).collect(Collectors.toList());
     }
 
