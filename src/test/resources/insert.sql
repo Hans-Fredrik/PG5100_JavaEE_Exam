@@ -8,9 +8,10 @@ INSERT INTO USER VALUES (7, 'Idar@vassdal.no', 'Idar2SittPassord', 'STUDENT');
 
 INSERT INTO LOCATION VALUES(1, 'Galleriet', '82');
 INSERT INTO LOCATION VALUES(2, 'Galleriet', '35');
+INSERT INTO LOCATION VALUES(3, 'Galleriet', '89');
 
-INSERT INTO COURSE (ID, NAME, FK_Location) VALUES(1, 'PG5100 - Enterprise programmering 1',1);
-INSERT INTO COURSE (ID, NAME, FK_Location) VALUES(2, 'BU5100 - Entepenorskap', 2);
+INSERT INTO COURSE (ID, NAME, FK_Location) VALUES(1, 'PG5100 - Enterprise programmering 1',2);
+INSERT INTO COURSE (ID, NAME, FK_Location) VALUES(2, 'BU5100 - Entepenorskap', 3);
 INSERT INTO COURSE (ID, NAME) VALUES(3, 'PG5600 - IOS programmering');
 
 

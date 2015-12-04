@@ -10,6 +10,7 @@ import org.junit.Test;
 import static org.mockito.Mockito.*;
 
 import repository.CourseDAO;
+import repository.EventDAO;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -20,11 +21,13 @@ public class CourseControllerTest {
 
     CourseController courseController;
     CourseDAO courseDAO;
+    EventDAO eventDAO;
 
     @Before
     public void setUp() throws Exception {
         courseDAO = mock(CourseDAO.class);
-        courseController = new CourseController(courseDAO);
+        eventDAO = mock(EventDAO.class);
+        courseController = new CourseController(courseDAO, eventDAO);
 
         courseController.init();
         courseController.getCourse().setId(1);

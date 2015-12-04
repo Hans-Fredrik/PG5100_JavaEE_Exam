@@ -54,8 +54,10 @@ public class EventControllerTest {
     }
 
     @Test
-    public void testUpdate() throws Exception {
-        // TODO: Remove or implement after everything is done..
+    public void testInitEvent() throws Exception {
+        eventController.setSelectedEventId(1);
+        eventController.initEvent();
+        verify(eventDAO, times(1)).findById(1);
     }
 
     @Test

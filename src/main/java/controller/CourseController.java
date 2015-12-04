@@ -1,9 +1,11 @@
 package controller;
 
 import domain.Course;
+import domain.Event;
 import domain.Location;
 import domain.User;
 import repository.CourseDAO;
+import repository.EventDAO;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
@@ -19,11 +21,13 @@ import java.util.List;
 public class CourseController {
 
     private final CourseDAO courseDAO;
+    private final EventDAO eventDAO;
     private Course course;
 
     @Inject
-    public CourseController(CourseDAO courseDAO){
+    public CourseController(CourseDAO courseDAO, EventDAO eventDAO){
         this.courseDAO = courseDAO;
+        this.eventDAO = eventDAO;
     }
 
     @PostConstruct
@@ -42,6 +46,14 @@ public class CourseController {
     }
 
     public void delete(Course course){
+        List<Event> events = eventDAO.getAll();
+
+        events.forEach(e -> {
+            if(e.getCourse().equals(course)){
+                eventDAO.remove(e);
+            }
+        });
+
         courseDAO.remove(course);
     }
 

@@ -67,14 +67,6 @@ public class EventController {
         eventDAO.remove(event);
     }
 
-    /*
-    public String update(int id){
-        Event eventToUpdate = eventDAO.findById(id);
-        if(eventToUpdate == null) return "events";
-
-        return "events";
-    }*/
-
     public List<Event> getAllSortedByStartingTime(){
         List<Event> eventList = eventDAO.getAll();
         return eventList.stream().sorted(Comparator.comparing(Event::getStartingTime)).collect(Collectors.toList());
