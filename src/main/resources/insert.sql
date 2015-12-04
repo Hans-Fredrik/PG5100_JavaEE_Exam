@@ -7,13 +7,13 @@ INSERT INTO USER VALUES (6, 'testerdelete@t.no', 'Tester123', 'STUDENT');
 INSERT INTO USER VALUES (7, 'Idar@vassdal.no', '2IdarPassord', 'STUDENT');
 
 
-INSERT INTO COURSE (ID, NAME) VALUES(1, 'PG5100 - Enterprise programmering 1');
-INSERT INTO COURSE (ID, NAME) VALUES(2, 'BU5100 - Entepenorskap');
-INSERT INTO COURSE (ID, NAME) VALUES(3, 'PG5600 - IOS programmering');
-
-
 INSERT INTO LOCATION VALUES(1, 'Galleriet', '82');
 INSERT INTO LOCATION VALUES(2, 'Galleriet', '35');
+
+INSERT INTO COURSE (ID, NAME, FK_Location) VALUES(1, 'PG5100 - Enterprise programmering 1',1);
+INSERT INTO COURSE (ID, NAME, FK_Location) VALUES(2, 'BU5100 - Entepenorskap', 2);
+INSERT INTO COURSE (ID, NAME) VALUES(3, 'PG5600 - IOS programmering');
+
 
 INSERT INTO USR_SUB VALUES (1,1);
 INSERT INTO USR_SUB VALUES (1,2);

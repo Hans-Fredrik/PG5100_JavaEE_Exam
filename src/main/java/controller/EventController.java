@@ -30,6 +30,7 @@ public class EventController {
     private final EventDAO eventDAO;
     private final CourseDAO courseDAO;
     private Event event;
+    private int selectedEventId;
     private int selectedCourseId;
 
 
@@ -44,6 +45,10 @@ public class EventController {
         event = new Event();
         event.setStartingTime(new Date());
         event.setEndingTime(new Date());
+    }
+
+    public void initEvent(){
+        this.event = eventDAO.findById(selectedEventId);
     }
 
     public Event getEvent() {
@@ -75,6 +80,13 @@ public class EventController {
         return eventList.stream().sorted(Comparator.comparing(Event::getStartingTime)).collect(Collectors.toList());
     }
 
+    public int getSelectedEventId() {
+        return selectedEventId;
+    }
+
+    public void setSelectedEventId(int selectedEventId) {
+        this.selectedEventId = selectedEventId;
+    }
 
     public int getSelectedCourseId() {
         return selectedCourseId;

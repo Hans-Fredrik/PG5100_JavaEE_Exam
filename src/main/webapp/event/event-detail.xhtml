@@ -12,22 +12,25 @@
     <ui:define name="content">
 
         <f:metadata>
-            <f:viewParam name="id" value="#{userController.selectedId}"/>
-            <f:viewAction action="#{userController.initUser()}"/>
+            <f:viewParam name="id" value="#{eventController.selectedEventId}"/>
+            <f:viewAction action="#{eventController.initEvent()}"/>
         </f:metadata>
 
 
         <br/><br/>
 
         <div class="container">
-            <h3>Update user</h3><br/>
+            <h3>Event details</h3><br/>
 
-            <h:form>
+            <h:form id="form">
 
                 <div class="form-group">
                     <div class="row">
+                        <div class="col-md-1">
+                            <h:outputLabel value="Title: "/>
+                        </div>
                         <div class="col-md-2">
-                            <h:inputHidden binding="#{inputID}" value="#{userController.user.id}"/>
+                            <h:outputLabel value="#{eventController.event.title}"/>
                         </div>
                     </div>
                 </div>
@@ -35,15 +38,10 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col-md-1">
-                            <h:outputLabel value="Email: "/>
+                            <h:outputLabel value="Description: "/>
                         </div>
                         <div class="col-md-2">
-                            <h:inputText validatorMessage="Invalid email" id="email" value="#{userController.user.email}">
-                                <p:ajax update="msgEmail" event="keyup" />
-                            </h:inputText>
-                        </div>
-                        <div class="col-md-3">
-                            <h:message for="email" id="msgEmail"/>
+                            <h:outputLabel value="#{eventController.event.description}"/>
                         </div>
                     </div>
                 </div>
@@ -51,15 +49,22 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col-md-1">
-                            <h:outputLabel value="Password: "/>
+                            <h:outputLabel value="Event type: "/>
                         </div>
                         <div class="col-md-2">
-                            <h:inputText validatorMessage="4-16 numbers and characters" id="password" value="#{userController.user.password}">
-                                <p:ajax update="msgPassword" event="keyup" />
-                            </h:inputText>
+                            <h:outputLabel value="#{eventController.event.eventType}"/>
                         </div>
-                        <div class="col-md-3">
-                            <h:message for="password" id="msgPassword"/>
+                    </div>
+                </div>
+
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-1">
+                            <h:outputLabel value="Course: "/>
+                        </div>
+                        <div class="col-md-2">
+                            <h:outputLabel value="#{eventController.event.course}"/>
                         </div>
                     </div>
                 </div>
@@ -67,20 +72,35 @@
                 <div class="form-group">
                     <div class="row">
                         <div class="col-md-1">
-                            <h:outputLabel value="Type: "/>
+                            <h:outputLabel value="Start time: "/>
                         </div>
                         <div class="col-md-2">
-                            <h:selectOneMenu class="form-control" value="#{userController.user.userType}">
-                                <f:selectItem itemValue="STUDENT" itemLabel="Student" />
-                                <f:selectItem itemValue="TEACHER" itemLabel="Teacher" />
-                            </h:selectOneMenu>
+                            <h:outputLabel value="#{eventController.event.startingTime}">
+                                <f:convertDateTime pattern="yyyy-MM-dd HH:mm" />
+                            </h:outputLabel>
                         </div>
                     </div>
                 </div>
 
-                <h:commandButton class="btn btn-default" action="#{userController.update(inputID.value)}" value="Update user"/>
+
+                <div class="form-group">
+                    <div class="row">
+                        <div class="col-md-1">
+                            <h:outputLabel value="End time: "/>
+                        </div>
+                        <div class="col-md-2">
+                            <h:outputLabel value="#{eventController.event.endingTime}">
+                                <f:convertDateTime pattern="yyyy-MM-dd HH:mm" />
+                            </h:outputLabel>
+                        </div>
+                    </div>
+                </div>
+
+
+                <h:commandButton class="btn btn-default" action="#{navigationController.processEventPage}" value="Back"/>
             </h:form>
         </div>
+
 
     </ui:define>
 </ui:composition>
