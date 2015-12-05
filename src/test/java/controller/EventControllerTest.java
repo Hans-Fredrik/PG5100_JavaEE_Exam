@@ -41,6 +41,7 @@ public class EventControllerTest {
     public void testPersist() throws Exception {
         eventController.setSelectedCourseId(1);
         eventController.init();
+        when(courseDAO.findById(1)).thenReturn(new Course());
         eventController.persist();
         verify(courseDAO, times(1)).findById(1);
         verify(eventDAO, times(1)).persist(anyObject());
