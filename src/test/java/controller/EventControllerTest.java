@@ -47,6 +47,14 @@ public class EventControllerTest {
     }
 
     @Test
+    public void testPersistWithNoCourse() throws Exception {
+        eventController.init();
+        when(courseDAO.findById(0)).thenReturn(null);
+        eventController.persist();
+        verify(eventDAO, never()).persist(anyObject());
+    }
+
+    @Test
     public void testDelete() throws Exception {
         Event event = new Event();
         eventController.delete(event);
