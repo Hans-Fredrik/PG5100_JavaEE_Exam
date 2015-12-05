@@ -44,6 +44,13 @@ public class EventTest {
         assertEquals(5, violations.size());
     }
 
+    @Test
+    public void testCourseNull() throws Exception {
+        Event event = createValidEventObject();
+        event.setCourse(null);
+        Set<ConstraintViolation<Event>> violations = validator.validate(event);
+        assertEquals(1, violations.size());
+    }
 
     @Test
     public void testMinTitleLength() throws Exception {

@@ -68,12 +68,11 @@
                             <h:outputLabel value="Course: "/>
                         </div>
                         <div class="col-md-2">
-                            <h:selectOneMenu class="form-control" id="course" value="#{eventController.selectedCourseId}">
+                            <h:selectOneMenu class="form-control"  id="course" value="#{eventController.selectedCourseId}">
                                 <c:forEach var="course" items="#{courseController.all}">
                                     <f:selectItem itemValue="#{course.id}" itemLabel="#{course.name}" />
                                 </c:forEach>
                             </h:selectOneMenu>
-
                         </div>
                     </div>
                 </div>

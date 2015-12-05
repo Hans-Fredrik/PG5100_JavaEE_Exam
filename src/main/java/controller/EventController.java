@@ -55,10 +55,14 @@ public class EventController {
 
     public void persist(){
         Course course = courseDAO.findById(selectedCourseId);
-        event.setCourse(course);
-        eventDAO.persist(event);
-        event.setTitle("");
-        event.setDescription("");
+        if(course != null){
+            event.setCourse(course);
+            eventDAO.persist(event);
+            event.setTitle("");
+            event.setDescription("");
+        }else{
+            event.setCourse(null);
+        }
     }
 
     public void delete(Event event){
