@@ -11,10 +11,6 @@ import java.util.List;
  */
 
 @Entity
-@NamedQueries({
-    @NamedQuery(name = "findAll", query = "SELECT u FROM User u"),
-        @NamedQuery(name = "findByEmail", query = "SELECT u FROM User u WHERE u.email like :mail"),
-})
 public class User {
 
     @Id
