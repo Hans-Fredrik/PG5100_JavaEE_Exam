@@ -2,7 +2,6 @@ package controller;
 
 import domain.Course;
 import domain.Location;
-import domain.User;
 import org.junit.Before;
 import org.junit.Test;
 import repository.CourseDAO;
@@ -11,8 +10,9 @@ import repository.LocationDAO;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.*;
-import static org.junit.Assert.*;
 
 public class LocationControllerTest {
 

@@ -9,7 +9,6 @@ import repository.EventDAO;
 
 import javax.annotation.PostConstruct;
 import javax.enterprise.inject.Model;
-import javax.faces.bean.ManagedBean;
 import javax.inject.Inject;
 import java.util.ArrayList;
 import java.util.List;

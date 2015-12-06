@@ -1,25 +1,18 @@
 package controller;
 
 import domain.Course;
-import domain.Event;;
+import domain.Event;
 import repository.CourseDAO;
 import repository.EventDAO;
 
-import javax.annotation.ManagedBean;
 import javax.annotation.PostConstruct;
-import javax.ejb.EJB;
 import javax.enterprise.inject.Model;
 import javax.inject.Inject;
 import java.util.Comparator;
-import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
 
-import java.text.SimpleDateFormat;
-import javax.faces.application.FacesMessage;
-import javax.faces.context.FacesContext;
-import org.primefaces.context.RequestContext;
-import org.primefaces.event.SelectEvent;
+;
 
 /**
  * Created by hffb on 03/12/15.

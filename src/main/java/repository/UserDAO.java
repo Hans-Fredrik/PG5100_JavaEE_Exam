@@ -1,15 +1,9 @@
 package repository;
 
-import domain.Course;
 import domain.User;
 
-import javax.ejb.Stateful;
 import javax.ejb.Stateless;
-import javax.interceptor.AroundInvoke;
-import javax.interceptor.InvocationContext;
-import javax.jws.soap.SOAPBinding;
-import javax.persistence.*;
-import java.util.List;
+import javax.persistence.EntityManager;
 
 /**
  * Created by hffb on 17/09/15.

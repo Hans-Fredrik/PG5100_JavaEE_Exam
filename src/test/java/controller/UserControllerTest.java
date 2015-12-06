@@ -8,9 +8,9 @@ import repository.UserDAO;
 
 import java.util.ArrayList;
 
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 import static org.mockito.Mockito.*;
-
-import static org.junit.Assert.*;
 
 public class UserControllerTest {
 

@@ -1,6 +1,8 @@
 package repository;
 
-import domain.*;
+import domain.Course;
+import domain.Event;
+import domain.EventType;
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -9,8 +11,6 @@ import org.junit.experimental.categories.Category;
 import javax.persistence.EntityManager;
 import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
-
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 

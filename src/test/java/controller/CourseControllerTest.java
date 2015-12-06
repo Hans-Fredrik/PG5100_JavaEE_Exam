@@ -4,18 +4,17 @@ import domain.Course;
 import domain.Location;
 import domain.User;
 import domain.UserType;
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
-import static org.mockito.Mockito.*;
-
 import repository.CourseDAO;
 import repository.EventDAO;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import static org.junit.Assert.*;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
+import static org.mockito.Mockito.*;
 
 public class CourseControllerTest {
 
